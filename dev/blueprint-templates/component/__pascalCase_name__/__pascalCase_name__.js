@@ -32,6 +32,6 @@ Component.propTypes = {
 
 export {
   Component as {{pascalCase name}},
-  // Container as {{pascalCase name}},
+  // Container as {{pascalCase name}}Container,
   Component as {{pascalCase name}}Component,
 };
