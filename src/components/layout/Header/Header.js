@@ -8,9 +8,24 @@ import clsx from 'clsx';
 
 import styles from './Header.module.scss';
 
-const Component = ({className, children}) => (
+const Component = ({ className, children }) => (
   <div className={clsx(className, styles.root)}>
-    <h2>Header</h2>
+    <img
+      className={clsx(className, styles.image)}
+      src="https://i.ibb.co/Fg1FQ8Q/ogloszenia-zolte-drobne-polacy-we-wloszech-1-1.jpg"
+      alt="header-pic"
+      border="0"
+    />
+    <div className={styles.overlay}></div>
+    <div className={styles.text}>
+      <a
+        href="#"
+        // onCLick={isLogged()}
+      >
+        Zaloguj się
+        {/* {isLogged? "<span>Twoje</span> <span>ogłoszenia</span>": "Zaloguj się"} */}
+      </a>
+    </div>
     {children}
   </div>
 );
@@ -32,6 +47,6 @@ Component.propTypes = {
 
 export {
   Component as Header,
-  // Container as Header,
+  // Container as HeaderContainer,
   Component as HeaderComponent,
 };

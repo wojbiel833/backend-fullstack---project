@@ -32,6 +32,6 @@ Component.propTypes = {
 
 export {
   Component as Homepage,
-  // Container as Homepage,
+  // Container as HomepageContainer,
   Component as HomepageComponent,
 };

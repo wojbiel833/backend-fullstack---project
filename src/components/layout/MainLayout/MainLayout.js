@@ -3,15 +3,21 @@ import PropTypes from 'prop-types';
 
 import clsx from 'clsx';
 
+import { Header } from '../Header/Header';
+import { Footer } from '../Footer/Footer';
+import { NavBar } from '../../common/NavBar/NavBar';
+
 // import { connect } from 'react-redux';
 // import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
 
 import styles from './MainLayout.module.scss';
 
-const Component = ({className, children}) => (
+const Component = ({ className, children }) => (
   <div className={clsx(className, styles.root)}>
-    <h2>MainLayout</h2>
+    <NavBar />
+    <Header />
     {children}
+    <Footer />
   </div>
 );
 
@@ -32,6 +38,6 @@ Component.propTypes = {
 
 export {
   Component as MainLayout,
-  // Container as MainLayout,
+  // Container as MainLayoutContainer,
   Component as MainLayoutComponent,
 };

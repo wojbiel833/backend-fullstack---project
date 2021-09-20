@@ -32,6 +32,6 @@ Component.propTypes = {
 
 export {
   Component as PostEdit,
-  // Container as PostEdit,
+  // Container as PostEditContainer,
   Component as PostEditComponent,
 };

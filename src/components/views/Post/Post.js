@@ -32,6 +32,6 @@ Component.propTypes = {
 
 export {
   Component as Post,
-  // Container as Post,
+  // Container as PostContainer,
   Component as PostComponent,
 };
