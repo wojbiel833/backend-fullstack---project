@@ -2,7 +2,6 @@
 
 .root {
   border: 1px dotted black;
-  padding: 20px;
 
   .head {
     padding: 0 20px;
@@ -11,6 +10,9 @@
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
+    // Button {
+    //   justify-content: flex-end;
+    // }
   }
 
   p {

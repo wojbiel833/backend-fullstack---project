@@ -7,7 +7,7 @@ import clsx from 'clsx';
 // import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
 
 import styles from './Post.module.scss';
-import { Button } from '../../common/Button/Button';
+import { Button } from '../Button/Button';
 
 const Component = ({ className, children }) => (
   <div className={clsx(className, styles.root)}>

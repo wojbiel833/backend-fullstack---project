@@ -1,16 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import Link from '@mui/material/Link';
+
 import clsx from 'clsx';
+
+import { styled } from '@mui/material/styles';
+
+import { Post } from '../../common/Post/Post';
 
 // import { connect } from 'react-redux';
 // import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
 
 import styles from './Homepage.module.scss';
 
-const Component = ({className, children}) => (
+const StyledLink = styled(Link)(({ theme }) => ({
+  fontSize: '20px',
+  margin: '20px',
+}));
+
+const Component = ({ className, children }) => (
   <div className={clsx(className, styles.root)}>
-    <h2>Homepage</h2>
+    <StyledLink href="#">Dodaj nowe ogłoszenie</StyledLink>
+    <Post />
     {children}
   </div>
 );

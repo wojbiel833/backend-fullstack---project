@@ -1,11 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import CssBaseline from '@mui/material/CssBaseline';
+// import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+
 import clsx from 'clsx';
 
 import { Header } from '../Header/Header';
 import { Footer } from '../Footer/Footer';
-import { NavBar } from '../../common/NavBar/NavBar';
+import { NavBar } from '../../features/NavBar/NavBar';
 
 // import { connect } from 'react-redux';
 // import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
@@ -16,7 +20,13 @@ const Component = ({ className, children }) => (
   <div className={clsx(className, styles.root)}>
     <NavBar />
     <Header />
-    {children}
+    <React.Fragment>
+      <CssBaseline />
+      <Container fixed>
+        {/* <Box sx={{ bgcolor: '#cfe8fc', height: '100vh' }} /> */}
+        {children}
+      </Container>
+    </React.Fragment>
     <Footer />
   </div>
 );
