@@ -8,9 +8,10 @@ import clsx from 'clsx';
 
 import styles from './PostAdd.module.scss';
 
-const Component = ({className, children}) => (
+const Component = ({ className, children }) => (
   <div className={clsx(className, styles.root)}>
-    <h2>PostAdd</h2>
+    <h2>Post Add</h2>
+    <p>aaaa</p>
     {children}
   </div>
 );

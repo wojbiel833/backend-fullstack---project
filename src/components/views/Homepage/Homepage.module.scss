@@ -1,4 +1,22 @@
 @import '../../../styles/settings.scss';
 
-// .root {
-// }
+.root {
+  .postAdd {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+
+    .icon {
+      position: absolute;
+      display: inline-block;
+      margin: 10px;
+      top: 13px;
+      left: -45px;
+    }
+
+    p {
+      display: inline-block;
+    }
+  }
+}
