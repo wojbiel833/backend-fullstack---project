@@ -1,19 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Link from '@mui/material/Link';
+import { Post } from '../../common/Post/Post';
+import { PostAdd } from '../PostAdd/PostAdd';
+import { PostEdit } from '../PostEdit/PostEdit';
+import { Announcements } from '../../features/Announcements/Announcements';
+import { NotFound } from '../NotFound/NotFound';
 
 import clsx from 'clsx';
-
-import { styled } from '@mui/material/styles';
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import { Post } from '../../common/Post/Post';
 
 // import { connect } from 'react-redux';
 // import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
 
+import Link from '@mui/material/Link';
+import { styled } from '@mui/material/styles';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+
 import styles from './Homepage.module.scss';
-import { PostAdd } from '../PostAdd/PostAdd';
 
 const StyledLink = styled(Link)(({ theme }) => ({
   position: 'relative',
@@ -23,7 +26,6 @@ const StyledLink = styled(Link)(({ theme }) => ({
 
 const Component = ({ className, children }) => (
   <div className={clsx(className, styles.root)}>
-    <PostAdd />
     {/* {isLogged ?  */}
     <h4 className={clsx(className, styles.postAdd)}>
       <StyledLink href="#">
@@ -31,41 +33,13 @@ const Component = ({ className, children }) => (
         <p>Dodaj nowe ogłoszenie</p>
       </StyledLink>
     </h4>
+    <PostAdd />
+    <PostEdit />
     <Post />
+    <Announcements />
+    <NotFound />
 
     {/* : ""} */}
-    <div className={clsx(className, styles.announcements)}>
-      <h4>
-        <StyledLink
-          href="#"
-          className={clsx(className, styles.announcementTitle)}
-        >
-          Srzedam
-        </StyledLink>
-      </h4>
-      <p className={clsx(className, styles.announcementDescription)}></p>
-      <h4>
-        {' '}
-        <StyledLink
-          href="#"
-          className={clsx(className, styles.announcementTitle)}
-        >
-          Zamienie auto
-        </StyledLink>
-      </h4>
-      <p className={clsx(className, styles.announcementDescription)}></p>
-      <h4>
-        {' '}
-        <StyledLink
-          href="#"
-          className={clsx(className, styles.announcementTitle)}
-        >
-          Kupie mieszkanie do 50m2
-        </StyledLink>
-      </h4>
-      <p className={clsx(className, styles.announcementDescription)}></p>
-      {children}
-    </div>
   </div>
 );
 

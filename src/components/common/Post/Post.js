@@ -1,20 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { Button } from '../Button/Button';
+
 import clsx from 'clsx';
 
 // import { connect } from 'react-redux';
 // import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
 
 import styles from './Post.module.scss';
-import { Button } from '../Button/Button';
 
 const Component = ({ className, children }) => (
   <div className={clsx(className, styles.root)}>
     <div className={clsx(className, styles.head)}>
       <h3>Kupie</h3>
       {/* {isLogged ?  */}
-      <Button />
+      <Button name="Edytyj" />
       {/* : ''} */}
     </div>
     <p>

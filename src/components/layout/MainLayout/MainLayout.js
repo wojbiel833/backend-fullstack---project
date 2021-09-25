@@ -1,18 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import CssBaseline from '@mui/material/CssBaseline';
-// import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
-
-import clsx from 'clsx';
-
 import { Header } from '../Header/Header';
 import { Footer } from '../Footer/Footer';
 import { NavBar } from '../../features/NavBar/NavBar';
 
+import clsx from 'clsx';
+
 // import { connect } from 'react-redux';
 // import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
+
+import CssBaseline from '@mui/material/CssBaseline';
+// import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
 
 import styles from './MainLayout.module.scss';
 

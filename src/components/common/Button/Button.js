@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 
 import { styled } from '@mui/material/styles';
+import SvgIcon from '@mui/material/SvgIcon';
 import Button from '@mui/material/Button';
 
 // import { connect } from 'react-redux';
@@ -11,7 +12,7 @@ import Button from '@mui/material/Button';
 
 import styles from './Button.module.scss';
 
-const ColorButton = styled(Button)(({ theme }) => ({
+const StyledButton = styled(Button)(({ theme }) => ({
   color: '#FFFFFF',
   backgroundColor: '#1C1C1C',
   '&:hover': {
@@ -19,15 +20,23 @@ const ColorButton = styled(Button)(({ theme }) => ({
   },
 }));
 
-const Component = ({ className, children }) => (
+const Component = ({ className, children, name, baseClassName }) => (
   <div className={clsx(className, styles.root)}>
-    <ColorButton>Edytuj</ColorButton>
+    <StyledButton>
+      <SvgIcon>
+        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+      </SvgIcon>
+
+      {name}
+    </StyledButton>
   </div>
 );
 
 Component.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
+  name: PropTypes.string,
+  baseClassName: PropTypes.string,
 };
 
 // const mapStateToProps = state => ({

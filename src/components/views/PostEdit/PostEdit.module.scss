@@ -1,4 +1,26 @@
 @import '../../../styles/settings.scss';
 
-// .root {
-// }
+.root {
+  border: 1px dotted black;
+  margin: 20px;
+
+  .head {
+    padding: 0 20px;
+    width: 100%;
+    display: inline-flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  p {
+    padding: 0 20px 20px 20px;
+    margin: 0;
+  }
+
+  .inputs {
+    padding: 0 20px;
+    margin-bottom: 20px;
+    width: 100%;
+  }
+}
