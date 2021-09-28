@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import { Button } from '../../common/Button/Button';
 
+import { faSave } from '@fortawesome/free-solid-svg-icons';
+
 import clsx from 'clsx';
 
 // import { connect } from 'react-redux';
@@ -16,7 +18,7 @@ const Component = ({ className, children }) => (
   <div className={clsx(className, styles.root)}>
     <div className={clsx(className, styles.head)}>
       <h3>Twoje ogłoszenie</h3>
-      <Button name="Zapisz" />
+      <Button name="Zapisz" icon={faSave} />
     </div>
     <div className={clsx(className, styles.inputs)}>
       <TextField

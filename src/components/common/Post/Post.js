@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import { Button } from '../Button/Button';
 
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
+
 import clsx from 'clsx';
 
 // import { connect } from 'react-redux';
@@ -15,7 +17,7 @@ const Component = ({ className, children }) => (
     <div className={clsx(className, styles.head)}>
       <h3>Kupie</h3>
       {/* {isLogged ?  */}
-      <Button name="Edytyj" />
+      <Button name="Edytyj" icon={faEdit} />
       {/* : ''} */}
     </div>
     <p>

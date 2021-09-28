@@ -3,21 +3,22 @@ import PropTypes from 'prop-types';
 
 import { Button } from '../../common/Button/Button';
 
+import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
+
 import clsx from 'clsx';
 
 // import { connect } from 'react-redux';
 // import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
 
 import TextField from '@mui/material/TextField';
-// import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
 import styles from './PostAdd.module.scss';
 
-const Component = ({ className, children }) => (
+const Component = ({ className, children, icon }) => (
   <div className={clsx(className, styles.root)}>
     <div className={clsx(className, styles.head)}>
       <h3>Nowe ogłoszenie</h3>
-      <Button name="Dodaj ogłoszenie" />
+      <Button name="Dodaj ogłoszenie" icon={faPlusCircle} />
     </div>
     <div className={clsx(className, styles.inputs)}>
       <TextField
@@ -48,6 +49,7 @@ Component.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
   name: PropTypes.string,
+  icon: PropTypes.string,
 };
 
 // const mapStateToProps = state => ({

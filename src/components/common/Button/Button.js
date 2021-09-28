@@ -4,13 +4,13 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 
 import { styled } from '@mui/material/styles';
-import SvgIcon from '@mui/material/SvgIcon';
 import Button from '@mui/material/Button';
 
 // import { connect } from 'react-redux';
 // import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
 
 import styles from './Button.module.scss';
+import { Icon } from '../Icon/Icon';
 
 const StyledButton = styled(Button)(({ theme }) => ({
   color: '#FFFFFF',
@@ -20,13 +20,10 @@ const StyledButton = styled(Button)(({ theme }) => ({
   },
 }));
 
-const Component = ({ className, children, name, baseClassName }) => (
+const Component = ({ className, children, name, baseClassName, icon }) => (
   <div className={clsx(className, styles.root)}>
     <StyledButton>
-      <SvgIcon>
-        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
-      </SvgIcon>
-
+      <Icon className={styles.icon} icon={icon} />
       {name}
     </StyledButton>
   </div>
@@ -37,6 +34,7 @@ Component.propTypes = {
   className: PropTypes.string,
   name: PropTypes.string,
   baseClassName: PropTypes.string,
+  icon: PropTypes.string,
 };
 
 // const mapStateToProps = state => ({
