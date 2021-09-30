@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 
 // import clsx from 'clsx';
 
-// import { connect } from 'react-redux';
-// import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
+import { connect } from 'react-redux';
+import { createActionLogInOut } from '../../../redux/navbarRedux.js';
 
 import { styled } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
@@ -26,21 +26,24 @@ const StyledNavBar = styled(AppBar)(({ thrme }) => ({
   backgroundColor: '#D4AD76',
 }));
 
-function Component() {
-  const [auth, setAuth] = React.useState(true);
-  const [anchorEl, setAnchorEl] = React.useState(null);
+function Component(props) {
+  const { logInOut } = props;
+  console.log(props);
 
-  const handleChange = event => {
-    setAuth(event.target.checked);
-  };
+  // const [auth, setAuth] = React.useState(true);
+  // const [anchorEl, setAnchorEl] = React.useState(null);
 
-  const handleMenu = event => {
-    setAnchorEl(event.currentTarget);
-  };
+  // const handleChange = event => {
+  //   setAuth(event.target.checked);
+  // };
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  // const handleMenu = event => {
+  //   setAnchorEl(event.currentTarget);
+  // };
+
+  // const handleClose = () => {
+  //   setAnchorEl(null);
+  // };
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -48,12 +51,12 @@ function Component() {
         <FormControlLabel
           control={
             <Switch
-              checked={auth}
-              onChange={handleChange}
+              // checked={auth}
+              onChange={logInOut}
               aria-label="login switch"
             />
           }
-          label={auth ? 'Logout' : 'Login'}
+          label={logInOut ? 'Logout' : 'Login'}
         />
       </FormGroup>
       <StyledNavBar position="static">
@@ -70,21 +73,21 @@ function Component() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Ogłoszenia
           </Typography>
-          {auth && (
+          {logInOut && (
             <div>
               <IconButton
                 size="large"
                 aria-label="account of current user"
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
-                onClick={handleMenu}
+                // onClick={handleMenu}
                 color="inherit"
               >
                 <AccountCircle />
               </IconButton>
               <Menu
                 id="menu-appbar"
-                anchorEl={anchorEl}
+                // anchorEl={anchorEl}
                 anchorOrigin={{
                   vertical: 'top',
                   horizontal: 'right',
@@ -94,11 +97,11 @@ function Component() {
                   vertical: 'top',
                   horizontal: 'right',
                 }}
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
+                // open={Boolean(anchorEl)}
+                // onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
+                {/* <MenuItem onClick={handleClose}>Profile</MenuItem> */}
+                {/* <MenuItem onClick={handleClose}>My account</MenuItem> */}
               </Menu>
             </div>
           )}
@@ -111,17 +114,18 @@ function Component() {
 Component.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
+  logInOut: PropTypes.func,
 };
 
-// const mapStateToProps = state => ({
-//   someProp: reduxSelector(state),
-// });
+const mapStateToProps = state => ({
+  // isLogged: reduxSelector(state),
+});
 
-// const mapDispatchToProps = dispatch => ({
-//   someAction: arg => dispatch(reduxActionCreator(arg)),
-// });
+const mapDispatchToProps = dispatch => ({
+  logInOut: () => dispatch(createActionLogInOut()),
+});
 
-// const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
+const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
 
 export {
   Component as NavBar,

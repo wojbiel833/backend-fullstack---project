@@ -1,12 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Post } from '../../common/Post/Post';
-import { PostAdd } from '../PostAdd/PostAdd';
-import { PostEdit } from '../PostEdit/PostEdit';
-import { Announcements } from '../../features/Announcements/Announcements';
-import { NotFound } from '../NotFound/NotFound';
-
 import clsx from 'clsx';
 
 // import { connect } from 'react-redux';
@@ -33,11 +27,7 @@ const Component = ({ className, children }) => (
         <p>Dodaj nowe ogłoszenie</p>
       </StyledLink>
     </h4>
-    <PostAdd />
-    <PostEdit />
-    <Post />
-    <Announcements />
-    <NotFound />
+    {children}
 
     {/* : ""} */}
   </div>
