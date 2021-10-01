@@ -22,13 +22,15 @@ import Menu from '@mui/material/Menu';
 
 // import styles from './NavBar.module.scss';
 
-const StyledNavBar = styled(AppBar)(({ thrme }) => ({
+const StyledNavBar = styled(AppBar)(({ theme }) => ({
   backgroundColor: '#D4AD76',
 }));
 
 function Component(props) {
-  const { logInOut } = props;
+  const { isLogged, logInOut } = props;
+
   console.log(props);
+  console.log(isLogged);
 
   // const [auth, setAuth] = React.useState(true);
   // const [anchorEl, setAnchorEl] = React.useState(null);
@@ -51,8 +53,8 @@ function Component(props) {
         <FormControlLabel
           control={
             <Switch
-              // checked={auth}
-              onChange={logInOut}
+              // checked={logInOut}
+              onChange={isLogged}
               aria-label="login switch"
             />
           }
@@ -115,14 +117,15 @@ Component.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
   logInOut: PropTypes.func,
+  isLogged: PropTypes.bool,
 };
 
 const mapStateToProps = state => ({
-  // isLogged: reduxSelector(state),
+  isLogged: createActionLogInOut(state),
 });
 
 const mapDispatchToProps = dispatch => ({
-  logInOut: () => dispatch(createActionLogInOut()),
+  logInOut: login => dispatch(createActionLogInOut(login)),
 });
 
 const Container = connect(mapStateToProps, mapDispatchToProps)(Component);

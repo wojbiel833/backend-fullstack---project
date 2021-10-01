@@ -15,13 +15,13 @@ export const createActionLogInOut = payload => ({
 });
 
 // reducer
-export default function reducer(statePart = [], action = {}) {
+export function reducer(statePart = [], action = {}) {
   switch (action.type) {
     case LOGIN_OUT:
       return {
         ...statePart,
         login: {
-          loggedIn: logIn ? false : true,
+          loggedIn: action.payload,
         },
       };
     default:

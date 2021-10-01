@@ -1,3 +1,4 @@
+// initial state
 export const initialState = {
   posts: {
     data: {},
