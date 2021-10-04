@@ -16,9 +16,9 @@ import Container from '@mui/material/Container';
 
 import styles from './MainLayout.module.scss';
 
-const Component = ({ className, children }) => (
+const Component = ({ className, children, props }) => (
   <div className={clsx(className, styles.root)}>
-    <NavBar />
+    <NavBar {...props} />
     <Header />
     <React.Fragment>
       <CssBaseline />
@@ -34,6 +34,7 @@ const Component = ({ className, children }) => (
 Component.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
+  props: PropTypes.node,
 };
 
 // const mapStateToProps = state => ({

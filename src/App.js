@@ -24,25 +24,28 @@ const theme = createTheme({
   },
 });
 
-const App = () => (
-  <Provider store={store}>
-    <BrowserRouter>
-      <StylesProvider injectFirst>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <MainLayout>
-            <Switch>
-              <Route exact path="/" component={Homepage} />
-              <Route exact path="/post/add" component={PostAdd} />
-              <Route exact path="/post/:id" component={Post} />
-              <Route exact path="/post/:id/edit" component={PostEdit} />
-              <Route path="*" component={NotFound} />
-            </Switch>
-          </MainLayout>
-        </ThemeProvider>
-      </StylesProvider>
-    </BrowserRouter>
-  </Provider>
-);
+const App = () => {
+  console.log(store);
+  return (
+    <Provider store={store}>
+      <BrowserRouter>
+        <StylesProvider injectFirst>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <MainLayout>
+              <Switch>
+                <Route exact path="/" component={Homepage} />
+                <Route exact path="/post/add" component={PostAdd} />
+                <Route exact path="/post/:id" component={Post} />
+                <Route exact path="/post/:id/edit" component={PostEdit} />
+                <Route path="*" component={NotFound} />
+              </Switch>
+            </MainLayout>
+          </ThemeProvider>
+        </StylesProvider>
+      </BrowserRouter>
+    </Provider>
+  );
+};
 
 export { App };

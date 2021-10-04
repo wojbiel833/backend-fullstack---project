@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 // import clsx from 'clsx';
 
 import { connect } from 'react-redux';
-import { createActionLogInOut } from '../../../redux/navbarRedux.js';
+import { initialState } from '../../../redux/initialState.js';
+import { logIn, createActionLogInOut } from '../../../redux/navbarRedux.js';
 
 import { styled } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
@@ -26,11 +27,13 @@ const StyledNavBar = styled(AppBar)(({ theme }) => ({
   backgroundColor: '#D4AD76',
 }));
 
-function Component(props) {
+function Component(props, state) {
   const { isLogged, logInOut } = props;
 
-  console.log(props);
-  console.log(isLogged);
+  console.log('state:', state);
+  console.log('props:', props);
+  console.log('isLogged:', isLogged);
+  console.log('initialState:', initialState);
 
   // const [auth, setAuth] = React.useState(true);
   // const [anchorEl, setAnchorEl] = React.useState(null);
@@ -121,11 +124,11 @@ Component.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  isLogged: createActionLogInOut(state),
+  isLogged: state.login,
 });
 
 const mapDispatchToProps = dispatch => ({
-  logInOut: login => dispatch(createActionLogInOut(login)),
+  logInOut: isLogged => dispatch(createActionLogInOut({ isLogged })),
 });
 
 const Container = connect(mapStateToProps, mapDispatchToProps)(Component);

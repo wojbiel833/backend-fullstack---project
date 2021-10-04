@@ -1,5 +1,5 @@
 // selectors
-export const logIn = ({ login }) => login.loggedIn;
+export const logIn = ({ login }) => login;
 
 // action name creator
 const reducerName = 'login';
@@ -10,7 +10,9 @@ export const LOGIN_OUT = createActionName('LOGIN_OUT');
 
 // action creators
 export const createActionLogInOut = payload => ({
-  payload,
+  payload: {
+    loggedIn: true,
+  },
   type: 'LOGIN_OUT',
 });
 
@@ -20,9 +22,7 @@ export function reducer(statePart = [], action = {}) {
     case LOGIN_OUT:
       return {
         ...statePart,
-        login: {
-          loggedIn: action.payload,
-        },
+        login: action.payload,
       };
     default:
       return statePart;
