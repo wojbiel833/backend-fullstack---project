@@ -3,18 +3,37 @@
 .root {
   border: 1px dotted black;
   margin: 20px;
+  padding: 0 20px;
 
-  .head {
-    padding: 0 20px;
-    width: 100%;
+  .content {
+    .head {
+      width: 100%;
+      display: inline-flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .text {
+      margin: 0;
+    }
+  }
+
+  .dates,
+  .contact {
     display: inline-flex;
     flex-flow: row nowrap;
     justify-content: space-between;
-    align-items: center;
-  }
+    width: 100%;
 
-  p {
-    padding: 0 20px 20px 20px;
-    margin: 0;
+    div {
+      margin: 10px;
+
+      h4,
+      p {
+        margin: 10px;
+        display: inline;
+      }
+    }
   }
 }

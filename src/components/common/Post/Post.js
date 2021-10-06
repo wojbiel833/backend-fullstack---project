@@ -14,23 +14,52 @@ import styles from './Post.module.scss';
 
 const Component = ({ className, children }) => (
   <div className={clsx(className, styles.root)}>
-    <div className={clsx(className, styles.head)}>
-      <h3>Kupie</h3>
-      {/* {isLogged ?  */}
-      <Button name="Edytyj" icon={faEdit} />
-      {/* : ''} */}
+    <div className={clsx(className, styles.content)}>
+      <div className={clsx(className, styles.head)}>
+        <h3>Kupie</h3>
+        {/* {isLogged ?  */}
+        <Button name="Edytuj" icon={faEdit} />
+        {/* : ''} */}
+      </div>
+      <p className={clsx(className, styles.text)}>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+        mollit anim id est laborum.
+      </p>
+      {children}
     </div>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-      cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-      est laborum.
-    </p>
-
-    {children}
+    <div className={clsx(className, styles.contact)}>
+      <div>
+        <h4>E-mail:</h4>
+        <p>example@gmail.com</p>
+      </div>
+      <div>
+        <h4>Telefon:</h4>
+        <p>0 700 880 774</p>
+      </div>
+      <div>
+        <h4>Lokalizacja:</h4>
+        <p>Warszawa</p>
+      </div>
+    </div>
+    <div className={clsx(className, styles.dates)}>
+      <div>
+        <h4>Data publikacji:</h4>
+        <p>01.01.1900</p>
+      </div>
+      <div>
+        <h4>Status ogłoszenia:</h4>
+        <p>Opublikowane</p>
+      </div>
+      <div>
+        <h4>Data ostatniej aktualizacji:</h4>
+        <p>01.01.1900</p>
+      </div>
+    </div>
   </div>
 );
 

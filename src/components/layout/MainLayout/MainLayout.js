@@ -1,6 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+// import { Post } from '../../common/Post/Post';
+// import { PostAdd } from '../../views/PostAdd/PostAdd';
+// import { PostEdit } from '../../views/PostEdit/PostEdit';
+
 import { Header } from '../Header/Header';
 import { Footer } from '../Footer/Footer';
 import { NavBar } from '../../features/NavBar/NavBar';
@@ -24,6 +28,9 @@ const Component = ({ className, children, props }) => (
       <CssBaseline />
       <Container fixed>
         {/* <Box sx={{ bgcolor: '#cfe8fc', height: '100vh' }} /> */}
+        {/* <Post />
+        <PostAdd />
+        <PostEdit /> */}
         {children}
       </Container>
     </React.Fragment>

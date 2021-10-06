@@ -3,24 +3,44 @@
 .root {
   border: 1px dotted black;
   margin: 20px;
+  padding: 0 20px;
 
-  .head {
-    padding: 0 20px;
-    width: 100%;
+  .content {
+    .head {
+      width: 100%;
+      display: inline-flex;
+      flex-flow: row wrap;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .inputs {
+      margin-bottom: 20px;
+      width: 100%;
+
+      .input:first-of-type {
+        margin-bottom: 20px;
+      }
+    }
+  }
+
+  .dates,
+  .contact {
     display: inline-flex;
-    flex-flow: row wrap;
+    flex-flow: row nowrap;
     justify-content: space-between;
-    align-items: center;
-  }
-
-  p {
-    padding: 0 20px 20px 20px;
-    margin: 0;
-  }
-
-  .inputs {
-    padding: 0 20px;
-    margin-bottom: 20px;
     width: 100%;
+
+    div {
+      margin: 10px;
+      display: inline-flex;
+
+      h4,
+      p {
+        margin: auto 10px;
+        display: inline;
+        align-items: center;
+      }
+    }
   }
 }
