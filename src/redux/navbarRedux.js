@@ -1,28 +1,37 @@
 // selectors
-export const logIn = ({ login }) => login;
+export const logIn = ({ loggedIn }) => loggedIn;
 
 // action name creator
 const reducerName = 'login';
 const createActionName = name => `app/${reducerName}/${name}`;
 
 // action types
-export const LOGIN_OUT = createActionName('LOGIN_OUT');
+export const LOG_IN = createActionName('LOG_IN');
+export const LOG_OUT = createActionName('LOG_OUT');
 
 // action creators
-export const createActionLogInOut = payload => ({
-  payload: {
-    loggedIn: true,
-  },
-  type: 'LOGIN_OUT',
+export const createActionLogIn = payload => ({
+  payload,
+  type: LOG_IN,
+});
+
+export const createActionLogOut = payload => ({
+  payload,
+  type: LOG_OUT,
 });
 
 // reducer
 export function reducer(statePart = [], action = {}) {
   switch (action.type) {
-    case LOGIN_OUT:
+    case LOG_IN:
       return {
         ...statePart,
-        login: action.payload,
+        loggedIn: action.payload,
+      };
+    case LOG_OUT:
+      return {
+        ...statePart,
+        loggedIn: action.payload,
       };
     default:
       return statePart;

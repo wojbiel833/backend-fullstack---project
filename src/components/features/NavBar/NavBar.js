@@ -4,8 +4,12 @@ import PropTypes from 'prop-types';
 // import clsx from 'clsx';
 
 import { connect } from 'react-redux';
-import { initialState } from '../../../redux/initialState.js';
-import { logIn, createActionLogInOut } from '../../../redux/navbarRedux.js';
+// import { initialState } from '../../../redux/initialState.js';
+import {
+  // logIn,
+  createActionLogIn,
+  createActionLogOut,
+} from '../../../redux/navbarRedux.js';
 
 import { styled } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
@@ -18,7 +22,7 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import Switch from '@mui/material/Switch';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormGroup from '@mui/material/FormGroup';
-import MenuItem from '@mui/material/MenuItem';
+// import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 
 // import styles from './NavBar.module.scss';
@@ -27,16 +31,18 @@ const StyledNavBar = styled(AppBar)(({ theme }) => ({
   backgroundColor: '#D4AD76',
 }));
 
-function Component(props, state) {
-  const { isLogged, logInOut } = props;
+function Component(props) {
+  const { isLogged, logIn, logOut } = props;
 
-  console.log('state:', state);
   console.log('props:', props);
   console.log('isLogged:', isLogged);
-  console.log('initialState:', initialState);
+  // console.log('initialState:', initialState);
 
   // const [auth, setAuth] = React.useState(true);
-  // const [anchorEl, setAnchorEl] = React.useState(null);
+  const [
+    anchorEl,
+    // setAnchorEl
+  ] = React.useState(null);
 
   // const handleChange = event => {
   //   setAuth(event.target.checked);
@@ -57,11 +63,11 @@ function Component(props, state) {
           control={
             <Switch
               // checked={logInOut}
-              onChange={isLogged}
+              onChange={isLogged ? logOut : logIn}
               aria-label="login switch"
             />
           }
-          label={logInOut ? 'Logout' : 'Login'}
+          label={isLogged ? 'Logout' : 'Login'}
         />
       </FormGroup>
       <StyledNavBar position="static">
@@ -78,7 +84,7 @@ function Component(props, state) {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Ogłoszenia
           </Typography>
-          {logInOut && (
+          {isLogged && (
             <div>
               <IconButton
                 size="large"
@@ -102,7 +108,7 @@ function Component(props, state) {
                   vertical: 'top',
                   horizontal: 'right',
                 }}
-                // open={Boolean(anchorEl)}
+                open={Boolean(anchorEl)}
                 // onClose={handleClose}
               >
                 {/* <MenuItem onClick={handleClose}>Profile</MenuItem> */}
@@ -119,22 +125,24 @@ function Component(props, state) {
 Component.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
-  logInOut: PropTypes.func,
+  logIn: PropTypes.func,
+  logOut: PropTypes.func,
   isLogged: PropTypes.bool,
 };
 
 const mapStateToProps = state => ({
-  isLogged: state.login,
+  isLogged: state.login.loggedIn,
 });
 
 const mapDispatchToProps = dispatch => ({
-  logInOut: isLogged => dispatch(createActionLogInOut({ isLogged })),
+  logIn: () => dispatch(createActionLogIn(true)),
+  logOut: () => dispatch(createActionLogOut(false)),
 });
 
 const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
 
 export {
   Component as NavBar,
-  // Container as NavBarContainer,
+  Container as NavBarContainer,
   Component as NavBarComponent,
 };

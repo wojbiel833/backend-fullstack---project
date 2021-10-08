@@ -29,7 +29,7 @@ const Component = ({ className, children }) => (
       border="0"
       width="100%"
     />
-    <StyledLink className={clsx(className, styles.link)} href="#">
+    <StyledLink className={clsx(className, styles.link)} href="/">
       Wróć do strony głównej
     </StyledLink>
     {children}

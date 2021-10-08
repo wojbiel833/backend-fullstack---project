@@ -34,7 +34,7 @@ Component.propTypes = {
   className: PropTypes.string,
   name: PropTypes.string,
   baseClassName: PropTypes.string,
-  icon: PropTypes.string,
+  icon: PropTypes.object,
 };
 
 // const mapStateToProps = state => ({

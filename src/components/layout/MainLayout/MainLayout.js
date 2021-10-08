@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// import { Post } from '../../common/Post/Post';
+// import { PostContainer } from '../../common/Post/Post';
 // import { PostAdd } from '../../views/PostAdd/PostAdd';
 // import { PostEdit } from '../../views/PostEdit/PostEdit';
 
-import { Header } from '../Header/Header';
+import { HeaderContainer } from '../Header/Header';
+// import { HomepageContainer } from '../../views/Homepage/Homepage';
 import { Footer } from '../Footer/Footer';
-import { NavBar } from '../../features/NavBar/NavBar';
+import { NavBarContainer } from '../../features/NavBar/NavBar';
 
 import clsx from 'clsx';
 
@@ -20,17 +21,18 @@ import Container from '@mui/material/Container';
 
 import styles from './MainLayout.module.scss';
 
-const Component = ({ className, children, props }) => (
+const Component = ({ className, children }) => (
   <div className={clsx(className, styles.root)}>
-    <NavBar {...props} />
-    <Header />
+    <NavBarContainer />
+    <HeaderContainer />
     <React.Fragment>
       <CssBaseline />
       <Container fixed>
+        {/* <HomepageContainer /> */}
         {/* <Box sx={{ bgcolor: '#cfe8fc', height: '100vh' }} /> */}
-        {/* <Post />
-        <PostAdd />
-        <PostEdit /> */}
+        {/* <PostContainer /> */}
+        {/* <PostAdd /> */}
+        {/* <PostEdit />  */}
         {children}
       </Container>
     </React.Fragment>
@@ -41,7 +43,7 @@ const Component = ({ className, children, props }) => (
 Component.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
-  props: PropTypes.node,
+  props: PropTypes.any,
 };
 
 // const mapStateToProps = state => ({

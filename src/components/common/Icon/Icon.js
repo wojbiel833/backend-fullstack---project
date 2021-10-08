@@ -15,7 +15,7 @@ const Component = ({ className, children, icon }) => (
 Component.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
-  icon: PropTypes.string,
+  icon: PropTypes.object,
 };
 
 // const mapStateToProps = state => ({
