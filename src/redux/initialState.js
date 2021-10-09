@@ -44,5 +44,5 @@ export const initialState = {
       error: false,
     },
   },
-  login: { loggedIn: false },
+  login: { loggedIn: true },
 };

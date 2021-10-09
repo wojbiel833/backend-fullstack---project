@@ -1,5 +1,7 @@
 /* selectors */
-export const getAll = ({posts}) => posts.data;
+export const getAll = ({ posts }) => posts.data;
+export const getPostsForAnnouncements = ({ posts }, postId) =>
+  posts.data.filter(post => post.listId == postId);
 
 /* action name creator */
 const reducerName = 'posts';
@@ -14,6 +16,12 @@ const FETCH_ERROR = createActionName('FETCH_ERROR');
 export const fetchStarted = payload => ({ payload, type: FETCH_START });
 export const fetchSuccess = payload => ({ payload, type: FETCH_SUCCESS });
 export const fetchError = payload => ({ payload, type: FETCH_ERROR });
+
+export const getPostById = ({ posts }, postId) => {
+  const filtered = posts.filter(post => new RegExp(postId.test(post.id)));
+
+  return filtered.length ? filtered[0] : { error: true };
+};
 
 /* thunk creators */
 

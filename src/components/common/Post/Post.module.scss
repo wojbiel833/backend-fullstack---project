@@ -2,8 +2,19 @@
 
 .root {
   border: 1px dotted black;
+  border-radius: 4px;
   margin: 20px;
   padding: 0 20px;
+
+  .link {
+    display: inline-flex;
+    text-decoration: none;
+    color: $font-color;
+    margin-right: 20px;
+    padding: 5px;
+    border: 1px solid $font-color;
+    border-radius: 4px;
+  }
 
   .content {
     margin-bottom: 20px;
@@ -14,6 +25,12 @@
       flex-flow: row nowrap;
       justify-content: space-between;
       align-items: center;
+
+      .buttons {
+        display: inline-flex;
+        flex-flow: row nowrap;
+        align-items: center;
+      }
     }
 
     .text {
