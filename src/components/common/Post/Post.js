@@ -111,6 +111,7 @@ Component.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
   isLogged: PropTypes.bool,
+  usersEmail: PropTypes.string,
   posts: PropTypes.array,
   id: PropTypes.number,
   name: PropTypes.string,
