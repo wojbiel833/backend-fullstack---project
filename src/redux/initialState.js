@@ -44,5 +44,5 @@ export const initialState = {
       error: false,
     },
   },
-  login: { loggedIn: true },
+  login: { loggedIn: true, email: 'example2@gmail.com' },
 };

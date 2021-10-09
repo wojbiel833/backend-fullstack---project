@@ -128,6 +128,7 @@ Component.propTypes = {
   logIn: PropTypes.func,
   logOut: PropTypes.func,
   isLogged: PropTypes.bool,
+  isUser: PropTypes.string,
 };
 
 const mapStateToProps = state => ({

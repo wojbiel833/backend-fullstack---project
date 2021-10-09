@@ -23,6 +23,7 @@ class Component extends React.Component {
       className,
       children,
       isLogged,
+      usersEmail,
       id,
       name,
       content,
@@ -34,6 +35,11 @@ class Component extends React.Component {
       status,
       match,
     } = this.props;
+
+    const isUser = email => {
+      console.log(usersEmail, email);
+      if (usersEmail == email) return true;
+    };
 
     console.log(
       id,
@@ -58,8 +64,7 @@ class Component extends React.Component {
                 <Link to={`/post/${id}`} className={styles.link}>
                   Przejdż do ogłoszenia
                 </Link>
-                {/* isUser ? */}
-                <Button name="Edytuj" icon={faEdit} />
+                {isUser(email) ? <Button name="Edytuj" icon={faEdit} /> : ''}
               </div>
             ) : (
               ''
@@ -127,6 +132,7 @@ const mapStateToProps = (state, props) => {
   return {
     // ...postParams,
     isLogged: state.login.loggedIn,
+    usersEmail: state.login.email,
     // posts: getPostsForAnnouncements(state, id),
   };
 };
