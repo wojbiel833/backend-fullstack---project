@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 // import { PostContainer } from '../../common/Post/Post';
 // import { PostAdd } from '../../views/PostAdd/PostAdd';
-// import { PostEdit } from '../../views/PostEdit/PostEdit';
+import { PostEdit } from '../../views/PostEdit/PostEdit';
 
 import { HeaderContainer } from '../Header/Header';
 // import { HomepageContainer } from '../../views/Homepage/Homepage';
@@ -20,6 +20,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 
 import styles from './MainLayout.module.scss';
+import { YourPosts } from '../../views/YourPosts/YourPosts';
 
 const Component = ({ className, children }) => (
   <div className={clsx(className, styles.root)}>
@@ -32,8 +33,10 @@ const Component = ({ className, children }) => (
         {/* <Box sx={{ bgcolor: '#cfe8fc', height: '100vh' }} /> */}
         {/* <PostContainer /> */}
         {/* <PostAdd /> */}
-        {/* <PostEdit />  */}
-        {children}
+        <YourPosts />
+        {/* <PostEdit /> */}
+
+        {/* {children} */}
       </Container>
     </React.Fragment>
     <Footer />

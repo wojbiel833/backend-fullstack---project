@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { PostContainer } from '../../common/Post/Post';
+import { YourPostContainer } from '../../common/YourPost/YourPost';
 // import { NotFound } from '../../views/NotFound/NotFound';
 
 import clsx from 'clsx';
@@ -12,7 +12,7 @@ import { connect } from 'react-redux';
 import { styled } from '@mui/material/styles';
 import Link from '@mui/material/Link';
 
-import styles from './Announcements.module.scss';
+import styles from './YourPosts.module.scss';
 
 const StyledLink = styled(Link)(({ theme }) => ({
   position: 'relative',
@@ -20,14 +20,13 @@ const StyledLink = styled(Link)(({ theme }) => ({
   margin: '20px',
 }));
 
-const Component = ({ className, children, posts, isLogged }) => {
-  console.log(posts);
+const Component = ({ className, children, email, posts, isLogged }) => {
   return (
     <div className={clsx(className, styles.root)}>
       <div className={clsx(className, styles.announcements)}>
         {/* {isLogged ? ( */}
         {posts.map(post => (
-          <PostContainer key={post.id} {...post} />
+          <YourPostContainer key={post.id} {...post} />
         ))}
         {/* ) : (
           <NotFound />
@@ -40,6 +39,7 @@ const Component = ({ className, children, posts, isLogged }) => {
 Component.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
+  email: PropTypes.string,
   posts: PropTypes.array,
   props: PropTypes.any,
   isLogged: PropTypes.bool,
@@ -57,7 +57,7 @@ const mapDispatchToProps = dispatch => ({
 const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
 
 export {
-  // Component as Announcements,
-  Container as Announcements,
-  Component as AnnouncementsComponent,
+  // Component as YourPosts,
+  Container as YourPosts,
+  Component as YourPostsComponent,
 };

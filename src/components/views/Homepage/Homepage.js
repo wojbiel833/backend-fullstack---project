@@ -13,6 +13,7 @@ import { styled } from '@mui/material/styles';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
 import styles from './Homepage.module.scss';
+import { YourPosts } from '../YourPosts/YourPosts';
 
 const StyledLink = styled(Link)(({ theme }) => ({
   position: 'relative',
@@ -30,10 +31,14 @@ const Component = ({ className, children, isLogged }) => (
             <p>Dodaj nowe ogłoszenie</p>
           </StyledLink>
         </h4>
+        <YourPosts />
         <Announcements>{children}</Announcements>
       </div>
     ) : (
-      <Announcements>{children}</Announcements>
+      <div>
+        <YourPosts />
+        <Announcements>{children}</Announcements>
+      </div>
     )}
   </div>
 );

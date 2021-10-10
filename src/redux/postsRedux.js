@@ -11,11 +11,14 @@ const createActionName = name => `app/${reducerName}/${name}`;
 const FETCH_START = createActionName('FETCH_START');
 const FETCH_SUCCESS = createActionName('FETCH_SUCCESS');
 const FETCH_ERROR = createActionName('FETCH_ERROR');
+const EDIT_POST = createActionName('EDIT_POST');
 
 /* action creators */
 export const fetchStarted = payload => ({ payload, type: FETCH_START });
 export const fetchSuccess = payload => ({ payload, type: FETCH_SUCCESS });
 export const fetchError = payload => ({ payload, type: FETCH_ERROR });
+
+export const editPost = payload => ({ payload, type: EDIT_POST });
 
 export const getPostById = ({ posts }, postId) => {
   const filtered = posts.filter(post => new RegExp(postId.test(post.id)));
@@ -54,6 +57,12 @@ export const reducer = (statePart = [], action = {}) => {
           active: false,
           error: action.payload,
         },
+      };
+    }
+    case EDIT_POST: {
+      return {
+        ...statePart,
+        editMode: action.payload,
       };
     }
     default:

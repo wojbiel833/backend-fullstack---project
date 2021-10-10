@@ -1,0 +1,45 @@
+@import '../../../styles/settings.scss';
+
+.root {
+  .announcements {
+    margin: 20px 0 60px 0;
+
+    .announcement {
+      margin: 20px;
+    }
+
+    .content {
+      margin-bottom: 20px;
+
+      .head {
+        width: 100%;
+        display: inline-flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .text {
+        margin: 0;
+      }
+    }
+
+    .dates,
+    .contact {
+      display: inline-flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      width: 100%;
+
+      div {
+        margin: 10px;
+
+        h4,
+        p {
+          margin: 10px;
+          display: inline;
+        }
+      }
+    }
+  }
+}

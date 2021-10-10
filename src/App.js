@@ -18,7 +18,7 @@ import { Post } from './components/common/Post/Post';
 import { PostEdit } from './components/views/PostEdit/PostEdit';
 import { PostAdd } from './components/views/PostAdd/PostAdd';
 import { NotFound } from './components/views/NotFound/NotFound';
-import { Announcements } from './components/features/Announcements/Announcements';
+import { YourPosts } from './components/views/YourPosts/YourPosts';
 
 const theme = createTheme({
   palette: {
@@ -35,7 +35,7 @@ const App = () => (
           <MainLayout>
             <Switch>
               <Route exact path="/" component={Homepage} />
-              {/* <Route exact path="/posts" component={Announcements} /> */}
+              <Route exact path="/posts" component={YourPosts} />
               <Route exact path="/post/add" component={PostAdd} />
               <Route exact path="/post/:id" component={Post} />
               <Route exact path="/post/:id/edit" component={PostEdit} />

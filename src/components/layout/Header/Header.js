@@ -24,12 +24,21 @@ const Component = ({ className, children, isLogged }) => {
       />
       <div className={styles.overlay}></div>
       <div className={styles.text}>
-        <a
-          href="#"
-          // onCLick={isLogged()}
-        >
-          {isLogged ? 'Twoje ogłoszenia' : 'Zaloguj się'}
-        </a>
+        {isLogged ? (
+          <a
+            href="/posts"
+            // onCLick={isLogged()}
+          >
+            Twoje ogłoszenia
+          </a>
+        ) : (
+          <a
+            href="www.google.com"
+            // onCLick={isLogged()}
+          >
+            Zaloguj się
+          </a>
+        )}
       </div>
       {children}
     </div>

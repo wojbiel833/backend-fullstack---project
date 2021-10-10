@@ -42,9 +42,10 @@ const StyledFormGroup = styled(FormGroup)(({ theme }) => ({
 function Component(props) {
   const { isLogged, isAdmin, logIn, logOut, logInAdmin, logOutAdmin } = props;
 
-  console.log('props:', props);
-  console.log('isLogged:', isLogged);
-  console.log('isAdmin:', isAdmin);
+  console.log(logIn);
+  // console.log('props:', props);
+  // console.log('isLogged:', isLogged);
+  // console.log('isAdmin:', isAdmin);
   // console.log('initialState:', initialState);
 
   // const [auth, setAuth] = React.useState(true);
