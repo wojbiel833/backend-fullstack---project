@@ -23,6 +23,7 @@ class Component extends React.Component {
       className,
       children,
       isLogged,
+      isAdmin,
       usersEmail,
       id,
       name,
@@ -64,7 +65,11 @@ class Component extends React.Component {
                 <Link to={`/post/${id}`} className={styles.link}>
                   Przejdż do ogłoszenia
                 </Link>
-                {isUser(email) ? <Button name="Edytuj" icon={faEdit} /> : ''}
+                {isAdmin || isUser(email) ? (
+                  <Button name="Edytuj" icon={faEdit} />
+                ) : (
+                  ''
+                )}
               </div>
             ) : (
               ''
@@ -111,6 +116,7 @@ Component.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
   isLogged: PropTypes.bool,
+  isAdmin: PropTypes.bool,
   usersEmail: PropTypes.string,
   posts: PropTypes.array,
   id: PropTypes.number,
@@ -133,6 +139,7 @@ const mapStateToProps = (state, props) => {
   return {
     // ...postParams,
     isLogged: state.login.loggedIn,
+    isAdmin: state.login.admin,
     usersEmail: state.login.email,
     // posts: getPostsForAnnouncements(state, id),
   };

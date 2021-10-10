@@ -9,6 +9,8 @@ import {
   // logIn,
   createActionLogIn,
   createActionLogOut,
+  createActionLogInAdmin,
+  createActionLogOutAdmin,
 } from '../../../redux/navbarRedux.js';
 
 import { styled } from '@mui/material/styles';
@@ -22,6 +24,7 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import Switch from '@mui/material/Switch';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormGroup from '@mui/material/FormGroup';
+import Checkbox from '@mui/material/Checkbox';
 // import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 
@@ -31,11 +34,17 @@ const StyledNavBar = styled(AppBar)(({ theme }) => ({
   backgroundColor: '#D4AD76',
 }));
 
+const StyledFormGroup = styled(FormGroup)(({ theme }) => ({
+  flexDirection: 'row',
+  display: 'inline-flex',
+}));
+
 function Component(props) {
-  const { isLogged, logIn, logOut } = props;
+  const { isLogged, isAdmin, logIn, logOut, logInAdmin, logOutAdmin } = props;
 
   console.log('props:', props);
   console.log('isLogged:', isLogged);
+  console.log('isAdmin:', isAdmin);
   // console.log('initialState:', initialState);
 
   // const [auth, setAuth] = React.useState(true);
@@ -58,7 +67,7 @@ function Component(props) {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <FormGroup>
+      <StyledFormGroup>
         <FormControlLabel
           control={
             <Switch
@@ -69,7 +78,14 @@ function Component(props) {
           }
           label={isLogged ? 'Logout' : 'Login'}
         />
-      </FormGroup>
+        <FormControlLabel
+          value="admin"
+          onChange={isAdmin ? logOutAdmin : logInAdmin}
+          control={<Checkbox />}
+          label="Admin"
+          labelPlacement="end"
+        />
+      </StyledFormGroup>
       <StyledNavBar position="static">
         <Toolbar>
           <IconButton
@@ -86,6 +102,17 @@ function Component(props) {
           </Typography>
           {isLogged && (
             <div>
+              <IconButton
+                size="small"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={logOut}
+                color="inherit"
+              >
+                {/* <AccountCircle /> */}
+                Wyloguj się
+              </IconButton>
               <IconButton
                 size="large"
                 aria-label="account of current user"
@@ -125,19 +152,25 @@ function Component(props) {
 Component.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
+  isLogged: PropTypes.bool,
   logIn: PropTypes.func,
   logOut: PropTypes.func,
-  isLogged: PropTypes.bool,
-  isUser: PropTypes.string,
+  isAdmin: PropTypes.bool,
+  logInAdmin: PropTypes.func,
+  logOutAdmin: PropTypes.func,
+  // isUser: PropTypes.string,
 };
 
 const mapStateToProps = state => ({
   isLogged: state.login.loggedIn,
+  isAdmin: state.login.admin,
 });
 
 const mapDispatchToProps = dispatch => ({
   logIn: () => dispatch(createActionLogIn(true)),
   logOut: () => dispatch(createActionLogOut(false)),
+  logInAdmin: () => dispatch(createActionLogInAdmin(true)),
+  logOutAdmin: () => dispatch(createActionLogOutAdmin(false)),
 });
 
 const Container = connect(mapStateToProps, mapDispatchToProps)(Component);

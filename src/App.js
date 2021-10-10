@@ -35,7 +35,7 @@ const App = () => (
           <MainLayout>
             <Switch>
               <Route exact path="/" component={Homepage} />
-              <Route exact path="/posts" component={Announcements} />
+              {/* <Route exact path="/posts" component={Announcements} /> */}
               <Route exact path="/post/add" component={PostAdd} />
               <Route exact path="/post/:id" component={Post} />
               <Route exact path="/post/:id/edit" component={PostEdit} />
