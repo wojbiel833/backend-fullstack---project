@@ -28,7 +28,7 @@ const Component = ({ className, children }) => (
     <HeaderContainer />
     <React.Fragment>
       <CssBaseline />
-      <Container fixed>
+      <Container maxWidth="lg" fixed>
         {/* <HomepageContainer /> */}
         {/* <Box sx={{ bgcolor: '#cfe8fc', height: '100vh' }} /> */}
         {/* <PostContainer /> */}
