@@ -119,7 +119,7 @@ Component.propTypes = {
   isAdmin: PropTypes.bool,
   usersEmail: PropTypes.string,
   posts: PropTypes.array,
-  id: PropTypes.number,
+  id: PropTypes.string,
   name: PropTypes.string,
   content: PropTypes.string,
   email: PropTypes.string,

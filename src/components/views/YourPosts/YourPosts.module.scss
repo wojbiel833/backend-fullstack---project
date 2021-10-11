@@ -1,6 +1,10 @@
 @import '../../../styles/settings.scss';
 
 .root {
+  h2 {
+    text-align: center;
+  }
+
   .announcements {
     margin: 20px 0 60px 0;
 

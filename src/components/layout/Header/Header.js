@@ -12,8 +12,6 @@ import { connect } from 'react-redux';
 import styles from './Header.module.scss';
 
 const Component = ({ className, children, isLogged }) => {
-  // const { isLogged } = props;
-
   return (
     <div className={clsx(className, styles.root)}>
       <img
@@ -25,19 +23,9 @@ const Component = ({ className, children, isLogged }) => {
       <div className={styles.overlay}></div>
       <div className={styles.text}>
         {isLogged ? (
-          <a
-            href="/posts"
-            // onCLick={isLogged()}
-          >
-            Twoje ogłoszenia
-          </a>
+          <a href="/posts">Twoje ogłoszenia</a>
         ) : (
-          <a
-            href="www.google.com"
-            // onCLick={isLogged()}
-          >
-            Zaloguj się
-          </a>
+          <a href="www.google.com">Zaloguj się</a>
         )}
       </div>
       {children}

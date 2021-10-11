@@ -1,28 +1,39 @@
 @import '../../../styles/settings.scss';
 
 .root {
-  .postAdd {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 30px;
+  div {
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
 
-    .icon {
-      position: absolute;
-      display: inline-block;
-      margin: 10px;
-      top: 13px;
-      left: -45px;
+    .postAdd {
+      width: 40%;
+      margin: auto;
+      border: 1px dotted black;
+      border-radius: 4px;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      // height: 30px;
+
+      .icon {
+        position: absolute;
+        display: inline-block;
+        margin: 10px;
+        top: 13px;
+        left: -45px;
+      }
+
+      p {
+        display: inline-block;
+      }
     }
 
-    p {
-      display: inline-block;
-    }
-  }
-
-  .announcements {
-    .announcement {
-      margin: 20px 0;
+    .announcements {
+      .announcement {
+        margin: 20px 0;
+      }
     }
   }
 }

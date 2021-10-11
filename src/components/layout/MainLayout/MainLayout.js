@@ -33,10 +33,10 @@ const Component = ({ className, children }) => (
         {/* <Box sx={{ bgcolor: '#cfe8fc', height: '100vh' }} /> */}
         {/* <PostContainer /> */}
         {/* <PostAdd /> */}
-        <YourPosts />
+        {/* <YourPosts /> */}
         {/* <PostEdit /> */}
 
-        {/* {children} */}
+        {children}
       </Container>
     </React.Fragment>
     <Footer />

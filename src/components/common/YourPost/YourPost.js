@@ -40,24 +40,24 @@ class Component extends React.Component {
     } = this.props;
 
     const isUser = email => {
-      console.log(usersEmail, email);
+      // console.log(usersEmail, email);
       if (usersEmail == email) return true;
     };
 
-    console.log(
-      id,
-      name,
-      content,
-      email,
-      phone,
-      localization,
-      publicationDate,
-      actualisationDate,
-      status,
-      editMode,
-      edit
-    );
-    console.log(match);
+    // console.log(
+    //   id,
+    //   name,
+    //   content,
+    //   email,
+    //   phone,
+    //   localization,
+    //   publicationDate,
+    //   actualisationDate,
+    //   status,
+    //   editMode,
+    //   edit
+    // );
+    // console.log(match);
 
     return (
       <div>
@@ -65,7 +65,7 @@ class Component extends React.Component {
           <div className={clsx(className, styles.root)}>
             <div className={clsx(className, styles.content)}>
               <div className={clsx(className, styles.head)}>
-                <h3>Twoje ogłoszenie</h3>
+                <h3>Ogłoszenie nr {id}</h3>
                 {isLogged ? (
                   <div>
                     {isAdmin || isUser(email) ? (
@@ -110,7 +110,6 @@ class Component extends React.Component {
                   value={content}
                   multiline
                   rows={8}
-                  defaultValue="Kupie/Sprzedam/Zamienię/Wynajmę..."
                   fullWidth={true}
                   minLength={20}
                   disabled={true}
@@ -178,7 +177,7 @@ Component.propTypes = {
   editMode: PropTypes.bool,
   usersEmail: PropTypes.string,
   posts: PropTypes.array,
-  id: PropTypes.number,
+  id: PropTypes.string,
   name: PropTypes.string,
   content: PropTypes.string,
   email: PropTypes.string,

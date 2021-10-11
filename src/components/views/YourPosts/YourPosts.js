@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { YourPostContainer } from '../../common/YourPost/YourPost';
-// import { NotFound } from '../../views/NotFound/NotFound';
+import { NotFound } from '../../views/NotFound/NotFound';
 
 import clsx from 'clsx';
 
@@ -22,16 +22,19 @@ const StyledLink = styled(Link)(({ theme }) => ({
 
 const Component = ({ className, children, email, posts, isLogged }) => {
   return (
-    <div className={clsx(className, styles.root)}>
-      <div className={clsx(className, styles.announcements)}>
-        {/* {isLogged ? ( */}
-        {posts.map(post => (
-          <YourPostContainer key={post.id} {...post} />
-        ))}
-        {/* ) : (
-          <NotFound />
-        )} */}
-      </div>
+    <div>
+      {isLogged ? (
+        <div className={clsx(className, styles.root)}>
+          <h2>Twoje ogłoszenia</h2>
+          <div className={clsx(className, styles.announcements)}>
+            {posts.map(post => (
+              <YourPostContainer key={post.id} {...post} />
+            ))}
+          </div>
+        </div>
+      ) : (
+        <NotFound />
+      )}
     </div>
   );
 };

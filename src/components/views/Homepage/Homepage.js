@@ -26,7 +26,7 @@ const Component = ({ className, children, isLogged }) => (
     {isLogged ? (
       <div>
         <h4 className={clsx(className, styles.postAdd)}>
-          <StyledLink href="#">
+          <StyledLink href="/post/add">
             <AddCircleOutlineIcon className={clsx(className, styles.icon)} />
             <p>Dodaj nowe ogłoszenie</p>
           </StyledLink>
@@ -36,7 +36,7 @@ const Component = ({ className, children, isLogged }) => (
       </div>
     ) : (
       <div>
-        <YourPosts />
+        {isLogged ? <YourPosts /> : ''}
         <Announcements>{children}</Announcements>
       </div>
     )}

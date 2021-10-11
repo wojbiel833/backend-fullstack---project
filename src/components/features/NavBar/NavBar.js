@@ -99,7 +99,18 @@ function Component(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Ogłoszenia
+            <IconButton
+              size="small"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              // onClick={logOut}
+              color="inherit"
+              href="/"
+            >
+              {/* <AccountCircle /> */}
+              Strona główna
+            </IconButton>
           </Typography>
           {isLogged && (
             <div>

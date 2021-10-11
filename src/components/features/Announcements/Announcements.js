@@ -24,6 +24,7 @@ const Component = ({ className, children, posts, isLogged }) => {
   console.log(posts);
   return (
     <div className={clsx(className, styles.root)}>
+      <h2>Najnowsze ogłoszenia</h2>
       <div className={clsx(className, styles.announcements)}>
         {/* {isLogged ? ( */}
         {posts.map(post => (
