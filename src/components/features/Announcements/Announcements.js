@@ -47,7 +47,7 @@ Component.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  posts: state.posts.data,
+  posts: state.posts.data.sort((a, b) => a.name.localeCompare(b.name)),
   isLogged: state.login.loggedIn,
 });
 

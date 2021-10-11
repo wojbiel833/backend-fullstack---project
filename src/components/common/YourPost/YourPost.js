@@ -18,6 +18,7 @@ import styles from './YourPost.module.scss';
 
 class Component extends React.Component {
   render() {
+    console.log(this.props);
     const {
       props,
       className,
@@ -43,21 +44,21 @@ class Component extends React.Component {
       // console.log(usersEmail, email);
       if (usersEmail == email) return true;
     };
-
-    // console.log(
-    //   id,
-    //   name,
-    //   content,
-    //   email,
-    //   phone,
-    //   localization,
-    //   publicationDate,
-    //   actualisationDate,
-    //   status,
-    //   editMode,
-    //   edit
-    // );
-    // console.log(match);
+    console.log(
+      id,
+      name,
+      content,
+      email,
+      phone,
+      localization,
+      publicationDate,
+      actualisationDate,
+      status,
+      editMode,
+      edit
+    );
+    console.log(match);
+    console.log(isLogged, isUser(email));
 
     return (
       <div>
@@ -74,7 +75,7 @@ class Component extends React.Component {
                           className={clsx(className, styles.button)}
                           name="Edytuj"
                           icon={faEdit}
-                          onClick={edit()}
+                          onClick={edit}
                         />
                         <Button
                           className={clsx(className, styles.button)}
@@ -100,7 +101,7 @@ class Component extends React.Component {
                   variant="filled"
                   fullWidth={true}
                   minLength={10}
-                  disabled={true}
+                  disabled={!editMode}
                 />
 
                 <TextField
@@ -112,7 +113,7 @@ class Component extends React.Component {
                   rows={8}
                   fullWidth={true}
                   minLength={20}
-                  disabled={true}
+                  disabled={!editMode}
                 />
               </div>
             </div>
@@ -130,7 +131,7 @@ class Component extends React.Component {
                   label="Telefon"
                   rows={1}
                   value={phone}
-                  disabled={true}
+                  disabled={!editMode}
                 />
               </div>
               <div>
@@ -140,7 +141,7 @@ class Component extends React.Component {
                   label="Lokalizacja"
                   rows={1}
                   value={localization}
-                  disabled={true}
+                  disabled={!editMode}
                 />
               </div>
             </div>
@@ -191,17 +192,23 @@ Component.propTypes = {
 
 const mapStateToProps = (state, props) => {
   console.log(props);
-  // const id = props.match.params.id;
-  // const filteredPosts = state.posts.data.filter(post => post.id == id);
-  // const postParams = filteredPosts[0] || {};
+
+  let postParams = {};
+  let id;
+
+  if (props.match) {
+    id = props.match.params.id;
+    const filteredPosts = state.posts.data.filter(post => post.id == id);
+    postParams = filteredPosts[0] || {};
+  }
 
   return {
-    // ...postParams,
+    ...postParams,
     isLogged: state.login.loggedIn,
     isAdmin: state.login.admin,
     usersEmail: state.login.email,
-    editMode: state.editMode,
-    // posts: getPostsForAnnouncements(state, id),
+    editMode: state.posts.editMode,
+    posts: getPostsForAnnouncements(state, id),
   };
 };
 

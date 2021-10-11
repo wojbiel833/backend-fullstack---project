@@ -14,11 +14,12 @@ import { store } from './redux/store';
 
 import { MainLayout } from './components/layout/MainLayout/MainLayout';
 import { Homepage } from './components/views/Homepage/Homepage';
-import { Post } from './components/common/Post/Post';
-import { PostEdit } from './components/views/PostEdit/PostEdit';
+import { PostContainer } from './components/common/Post/Post';
+// import { PostEdit } from './components/views/PostEdit/PostEdit';
 import { PostAdd } from './components/views/PostAdd/PostAdd';
 import { NotFound } from './components/views/NotFound/NotFound';
-import { YourPosts } from './components/views/YourPosts/YourPosts';
+import { YourPostsContainer } from './components/views/YourPosts/YourPosts';
+import { YourPostContainer } from './components/common/YourPost/YourPost';
 
 const theme = createTheme({
   palette: {
@@ -35,14 +36,14 @@ const App = () => (
           <MainLayout>
             <Switch>
               <Route exact path="/" component={Homepage} />
-              <Route exact path="/posts" component={YourPosts} />
+              <Route exact path="/posts" component={YourPostsContainer} />
               <Route exact path="/post/add" component={PostAdd} />
-              <Route exact path="/post/:id" component={Post} />
+              <Route exact path="/post/:id" component={PostContainer} />
               <Route
                 exact
                 path="/post/:id/edit"
-                component={PostEdit}
-                // component={YourPost}
+                // component={PostEdit}
+                component={YourPostContainer}
               />
               <Route path="*" component={NotFound} />
             </Switch>

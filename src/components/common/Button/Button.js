@@ -20,9 +20,16 @@ const StyledButton = styled(Button)(({ theme }) => ({
   },
 }));
 
-const Component = ({ className, children, name, baseClassName, icon }) => (
+const Component = ({
+  className,
+  children,
+  name,
+  baseClassName,
+  icon,
+  onClick,
+}) => (
   <div className={clsx(className, styles.root)}>
-    <StyledButton>
+    <StyledButton onClick={onClick}>
       <Icon className={styles.icon} icon={icon} />
       {name}
     </StyledButton>
@@ -35,6 +42,7 @@ Component.propTypes = {
   name: PropTypes.string,
   baseClassName: PropTypes.string,
   icon: PropTypes.object,
+  onClick: PropTypes.func,
 };
 
 // const mapStateToProps = state => ({

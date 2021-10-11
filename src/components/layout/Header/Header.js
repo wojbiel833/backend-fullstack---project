@@ -25,7 +25,7 @@ const Component = ({ className, children, isLogged }) => {
         {isLogged ? (
           <a href="/posts">Twoje ogłoszenia</a>
         ) : (
-          <a href="www.google.com">Zaloguj się</a>
+          <a href="https://google.com">Zaloguj się</a>
         )}
       </div>
       {children}

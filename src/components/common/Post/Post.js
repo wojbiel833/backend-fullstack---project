@@ -132,16 +132,22 @@ Component.propTypes = {
 
 const mapStateToProps = (state, props) => {
   console.log(props);
-  // const id = props.match.params.id;
-  // const filteredPosts = state.posts.data.filter(post => post.id == id);
-  // const postParams = filteredPosts[0] || {};
+
+  let postParams = {};
+  let id;
+
+  if (props.match) {
+    id = props.match.params.id;
+    const filteredPosts = state.posts.data.filter(post => post.id == id);
+    postParams = filteredPosts[0] || {};
+  }
 
   return {
-    // ...postParams,
+    ...postParams,
     isLogged: state.login.loggedIn,
     isAdmin: state.login.admin,
     usersEmail: state.login.email,
-    // posts: getPostsForAnnouncements(state, id),
+    posts: getPostsForAnnouncements(state, id),
   };
 };
 
@@ -152,7 +158,7 @@ const mapDispatchToProps = dispatch => ({
 const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
 
 export {
-  Component as Post,
+  // Component as Post,
   Container as PostContainer,
   Component as PostComponent,
 };

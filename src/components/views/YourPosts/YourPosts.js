@@ -61,6 +61,6 @@ const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
 
 export {
   // Component as YourPosts,
-  Container as YourPosts,
+  Container as YourPostsContainer,
   Component as YourPostsComponent,
 };

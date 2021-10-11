@@ -1,6 +1,7 @@
 // initial state
 export const initialState = {
   posts: {
+    editMode: false,
     data: [
       {
         id: '00000000001',
@@ -44,6 +45,5 @@ export const initialState = {
       error: false,
     },
   },
-  login: { loggedIn: true, email: 'example2@gmail.com', admin: false },
-  editMode: false,
+  login: { loggedIn: false, email: 'example2@gmail.com', admin: false },
 };
