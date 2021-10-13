@@ -15,14 +15,14 @@ import { connect } from 'react-redux';
 import TextField from '@mui/material/TextField';
 
 import styles from './YourPost.module.scss';
+import { NotFound } from '../../views/NotFound/NotFound';
 
 class Component extends React.Component {
   render() {
-    console.log(this.props);
+    // console.log(this.props);
     const {
-      props,
       className,
-      children,
+
       isLogged,
       isAdmin,
       usersEmail,
@@ -33,36 +33,35 @@ class Component extends React.Component {
       phone,
       localization,
       publicationDate,
-      actualisationDate,
-      status,
-      match,
+
       editMode,
       edit,
     } = this.props;
 
     const isUser = email => {
       // console.log(usersEmail, email);
-      if (usersEmail == email) return true;
+      if (usersEmail === email) return true;
     };
-    console.log(
-      id,
-      name,
-      content,
-      email,
-      phone,
-      localization,
-      publicationDate,
-      actualisationDate,
-      status,
-      editMode,
-      edit
-    );
-    console.log(match);
-    console.log(isLogged, isUser(email));
+
+    // console.log(
+    //   id,
+    //   name,
+    //   content,
+    //   email,
+    //   phone,
+    //   localization,
+    //   publicationDate,
+    //   actualisationDate,
+    //   status,
+    //   editMode,
+    //   edit
+    // );
+    // console.log(match);
+    // console.log(isLogged, isUser(email));
 
     return (
       <div>
-        {isLogged && isUser(email) ? (
+        {(isLogged && isUser(email)) || (isLogged && isAdmin) ? (
           <div className={clsx(className, styles.root)}>
             <div className={clsx(className, styles.content)}>
               <div className={clsx(className, styles.head)}>
@@ -72,12 +71,14 @@ class Component extends React.Component {
                     {isAdmin || isUser(email) ? (
                       <div className={clsx(className, styles.buttons)}>
                         <Button
+                          to=""
                           className={clsx(className, styles.button)}
                           name="Edytuj"
                           icon={faEdit}
                           onClick={edit}
                         />
                         <Button
+                          to=""
                           className={clsx(className, styles.button)}
                           name="Zapisz"
                           icon={faSave}
@@ -160,8 +161,10 @@ class Component extends React.Component {
               </div>
             </div>
           </div>
-        ) : (
+        ) : isLogged ? (
           ''
+        ) : (
+          <NotFound />
         )}
       </div>
     );
@@ -169,9 +172,7 @@ class Component extends React.Component {
 }
 
 Component.propTypes = {
-  props: PropTypes.node,
   match: PropTypes.any,
-  children: PropTypes.node,
   className: PropTypes.string,
   isLogged: PropTypes.bool,
   isAdmin: PropTypes.bool,
@@ -185,20 +186,18 @@ Component.propTypes = {
   phone: PropTypes.string,
   localization: PropTypes.string,
   publicationDate: PropTypes.string,
-  actualisationDate: PropTypes.string,
-  status: PropTypes.string,
   edit: PropTypes.func,
 };
 
 const mapStateToProps = (state, props) => {
-  console.log(props);
+  // console.log(props);
 
   let postParams = {};
   let id;
 
   if (props.match) {
     id = props.match.params.id;
-    const filteredPosts = state.posts.data.filter(post => post.id == id);
+    const filteredPosts = state.posts.data.filter(post => post.id === id);
     postParams = filteredPosts[0] || {};
   }
 

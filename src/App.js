@@ -42,7 +42,6 @@ const App = () => (
               <Route
                 exact
                 path="/post/:id/edit"
-                // component={PostEdit}
                 component={YourPostContainer}
               />
               <Route path="*" component={NotFound} />

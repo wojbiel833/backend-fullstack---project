@@ -19,7 +19,7 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
+// import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import Switch from '@mui/material/Switch';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -42,7 +42,7 @@ const StyledFormGroup = styled(FormGroup)(({ theme }) => ({
 function Component(props) {
   const { isLogged, isAdmin, logIn, logOut, logInAdmin, logOutAdmin } = props;
 
-  console.log(logIn);
+  // console.log(logIn);
   // console.log('props:', props);
   // console.log('isLogged:', isLogged);
   // console.log('isAdmin:', isAdmin);
@@ -90,7 +90,7 @@ function Component(props) {
       <StyledNavBar position="static">
         <NavContainer maxWidth="lg">
           <Toolbar>
-            <IconButton
+            {/* <IconButton
               size="large"
               edge="start"
               color="inherit"
@@ -98,7 +98,7 @@ function Component(props) {
               sx={{ mr: 2 }}
             >
               <MenuIcon />
-            </IconButton>
+            </IconButton> */}
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               <IconButton
                 size="small"
@@ -109,7 +109,6 @@ function Component(props) {
                 color="inherit"
                 href="/"
               >
-                {/* <AccountCircle /> */}
                 Strona główna
               </IconButton>
             </Typography>
@@ -123,7 +122,6 @@ function Component(props) {
                   onClick={logOut}
                   color="inherit"
                 >
-                  {/* <AccountCircle /> */}
                   Wyloguj się
                 </IconButton>
                 <IconButton

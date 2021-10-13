@@ -5,6 +5,7 @@ import clsx from 'clsx';
 
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom';
 
 // import { connect } from 'react-redux';
 // import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
@@ -27,9 +28,10 @@ const Component = ({
   baseClassName,
   icon,
   onClick,
+  to,
 }) => (
   <div className={clsx(className, styles.root)}>
-    <StyledButton onClick={onClick}>
+    <StyledButton component={Link} onClick={onClick} to={to}>
       <Icon className={styles.icon} icon={icon} />
       {name}
     </StyledButton>
@@ -43,6 +45,7 @@ Component.propTypes = {
   baseClassName: PropTypes.string,
   icon: PropTypes.object,
   onClick: PropTypes.func,
+  to: PropTypes.string,
 };
 
 // const mapStateToProps = state => ({

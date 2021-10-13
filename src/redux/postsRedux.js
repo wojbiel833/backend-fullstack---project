@@ -1,7 +1,7 @@
 /* selectors */
 export const getAll = ({ posts }) => posts.data;
 export const getPostsForAnnouncements = ({ posts }, postId) =>
-  posts.data.filter(post => post.listId == postId);
+  posts.data.filter(post => post.listId === postId);
 
 /* action name creator */
 const reducerName = 'posts';

@@ -1,17 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Link } from 'react-router-dom';
-
 import { Button } from '../Button/Button';
-// import { NotFound } from '../../views/NotFound/NotFound';
 
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
 import clsx from 'clsx';
-import { getPostsForAnnouncements } from '../../../redux/postsRedux';
 
+import { getPostsForAnnouncements } from '../../../redux/postsRedux';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+
 // import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
 
 import styles from './Post.module.scss';
@@ -19,9 +18,7 @@ import styles from './Post.module.scss';
 class Component extends React.Component {
   render() {
     const {
-      props,
       className,
-      children,
       isLogged,
       isAdmin,
       usersEmail,
@@ -38,22 +35,26 @@ class Component extends React.Component {
     } = this.props;
 
     const isUser = email => {
-      console.log(usersEmail, email);
-      if (usersEmail == email) return true;
+      // console.log(usersEmail, email);
+      if (usersEmail === email) return true;
     };
 
-    console.log(
-      id,
-      name,
-      content,
-      email,
-      phone,
-      localization,
-      publicationDate,
-      actualisationDate,
-      status
-    );
-    console.log(match);
+    let pageUrl = '';
+    if (match) {
+      pageUrl = match.url;
+    }
+    // console.log(
+    //   id,
+    //   name,
+    //   content,
+    //   email,
+    //   phone,
+    //   localization,
+    //   publicationDate,
+    //   actualisationDate,
+    //   status
+    // );
+    // console.log(match.url);
 
     return (
       <div className={clsx(className, styles.root)}>
@@ -62,11 +63,15 @@ class Component extends React.Component {
             <h3>{name}</h3>
             {isLogged ? (
               <div className={clsx(className, styles.buttons)}>
-                <Link to={`/post/${id}`} className={styles.link}>
-                  Przejdż do ogłoszenia
-                </Link>
+                {pageUrl === `/post/${id}` ? (
+                  ''
+                ) : (
+                  <Link to={`/post/${id}`} className={styles.link}>
+                    Przejdż do ogłoszenia
+                  </Link>
+                )}
                 {isAdmin || isUser(email) ? (
-                  <Button name="Edytuj" icon={faEdit} />
+                  <Button to={`/post/${id}/edit`} name="Edytuj" icon={faEdit} />
                 ) : (
                   ''
                 )}
@@ -111,9 +116,7 @@ class Component extends React.Component {
 }
 
 Component.propTypes = {
-  props: PropTypes.node,
   match: PropTypes.any,
-  children: PropTypes.node,
   className: PropTypes.string,
   isLogged: PropTypes.bool,
   isAdmin: PropTypes.bool,
@@ -131,14 +134,12 @@ Component.propTypes = {
 };
 
 const mapStateToProps = (state, props) => {
-  console.log(props);
-
   let postParams = {};
   let id;
 
   if (props.match) {
     id = props.match.params.id;
-    const filteredPosts = state.posts.data.filter(post => post.id == id);
+    const filteredPosts = state.posts.data.filter(post => post.id === id);
     postParams = filteredPosts[0] || {};
   }
 
