@@ -7,7 +7,10 @@ import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
 import clsx from 'clsx';
 
-import { getPostsForAnnouncements } from '../../../redux/postsRedux';
+import {
+  getPostsForAnnouncements,
+  fetchPublished,
+} from '../../../redux/postsRedux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -16,6 +19,12 @@ import { Link } from 'react-router-dom';
 import styles from './Post.module.scss';
 
 class Component extends React.Component {
+  componentDidMount() {
+    console.log(this.props);
+    const { fetchPublishedPosts } = this.props;
+    // fetchPublishedPosts();
+  }
+
   render() {
     const {
       className,
@@ -33,6 +42,7 @@ class Component extends React.Component {
       status,
       match,
     } = this.props;
+    console.log(this.props);
 
     const isUser = email => {
       // console.log(usersEmail, email);
@@ -131,6 +141,7 @@ Component.propTypes = {
   publicationDate: PropTypes.string,
   actualisationDate: PropTypes.string,
   status: PropTypes.string,
+  fetchPublishedPosts: PropTypes.func,
 };
 
 const mapStateToProps = (state, props) => {
@@ -153,7 +164,7 @@ const mapStateToProps = (state, props) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  // someAction: arg => dispatch(reduxActionCreator(arg)),
+  fetchPublishedPosts: dispatch(fetchPublished()),
 });
 
 const Container = connect(mapStateToProps, mapDispatchToProps)(Component);

@@ -1,5 +1,9 @@
+import Axios from 'axios';
+import { api } from '../settings';
+
 /* selectors */
 export const getAll = ({ posts }) => posts.data;
+export const getLoadingState = ({ posts }) => posts.loading;
 export const getPostsForAnnouncements = ({ posts }, postId) =>
   posts.data.filter(post => post.listId === postId);
 
@@ -27,6 +31,21 @@ export const getPostById = ({ posts }, postId) => {
 };
 
 /* thunk creators */
+export const fetchPublished = () => {
+  return (dispatch, getState) => {
+    dispatch(fetchStarted());
+
+    // if ((!getAll || getAll === []) && !getLoadingState.active) {
+    Axios.get('http://localhost:8000/api/posts')
+      .then(res => {
+        dispatch(fetchSuccess(res.data));
+      })
+      .catch(err => {
+        dispatch(fetchError(err.message || true));
+      });
+    // }
+  };
+};
 
 /* reducer */
 export const reducer = (statePart = [], action = {}) => {
