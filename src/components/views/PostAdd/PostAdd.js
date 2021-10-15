@@ -29,17 +29,19 @@ class Component extends React.Component {
   submitForm = e => {
     e.preventDefault();
 
-    const { name, content, email, localization } = this.state;
+    const { post } = this.state;
 
     let error = null;
 
-    if ((!name, !content, !email, !localization))
+    if ((!post.name, !post.content, !post.email, !post.localization))
       error = 'Musisz wypełnić wymagane pola oznaczone gwiazdką';
 
-    if (name.length < 10) error = 'Tytuł jest za krótki (min. 10 znaków)';
-    if (content.length < 20) error = 'Tytuł jest za krótki (min. 20 znaków)';
-    if (!email.includes('@')) error = 'Zły format adresu e-mail';
-    if (localization.length < 3) error = 'Tytuł jest za krótki (min. 3 znaki)';
+    if (post.name.length <= 10) error = 'Tytuł jest za krótki (min. 10 znaków)';
+    if (post.content.length <= 20)
+      error = 'Tytuł jest za krótki (min. 20 znaków)';
+    if (!post.email.includes('@')) error = 'Zły format adresu e-mail';
+    if (post.localization.length <= 3)
+      error = 'Nazwa lokaliozacji jest za krótka (min. 3 znaki)';
 
     if (!error) {
       const formData = new FormData();
