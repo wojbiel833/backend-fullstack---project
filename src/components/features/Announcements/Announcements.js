@@ -5,6 +5,7 @@ import { PostContainer } from '../../common/Post/Post';
 // import { NotFound } from '../../views/NotFound/NotFound';
 
 import clsx from 'clsx';
+
 import { fetchPublished } from '../../../redux/postsRedux';
 import { connect } from 'react-redux';
 // import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
@@ -12,14 +13,14 @@ import { connect } from 'react-redux';
 import styles from './Announcements.module.scss';
 
 class Component extends React.Component {
-  componentDidMount() {
-    console.log(this.props);
-    const { fetchPublishedPosts } = this.props;
-    // fetchPublishedPosts();
-  }
+  // componentDidMount() {
+  //   console.log(this.props);
+  // const { fetchPublishedPosts } = this.props;
+  // fetchPublishedPosts();
+  // }
   render() {
     const { className, children, posts, isLogged } = this.props;
-    console.log(posts);
+    // console.log(posts);
 
     return (
       <div className={clsx(className, styles.root)}>
@@ -44,8 +45,7 @@ Component.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  posts: state.posts.data,
-  // state.posts.data.sort((a, b) => a.name.localeCompare(b.name)),
+  posts: state.posts.data.sort((a, b) => a.name.localeCompare(b.name)),
   isLogged: state.login.loggedIn,
 });
 

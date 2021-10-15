@@ -13,3 +13,11 @@ export const api = {
   notRepeatParam: 'repeat=false',
   repeatParam: 'repeat_ne=false',
 };
+
+export const API_URL =
+  process.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:8000/api';
+
+export const POSTS_URL =
+  process.env.NODE_ENV === 'production'
+    ? '/uploads'
+    : 'http://localhost:8000/posts';

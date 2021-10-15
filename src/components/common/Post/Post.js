@@ -20,7 +20,7 @@ import styles from './Post.module.scss';
 
 class Component extends React.Component {
   componentDidMount() {
-    console.log(this.props);
+    // console.log(this.props);
     const { fetchPublishedPosts } = this.props;
     // fetchPublishedPosts();
   }
@@ -42,7 +42,7 @@ class Component extends React.Component {
       status,
       match,
     } = this.props;
-    console.log(this.props);
+    // console.log(this.props);
 
     const isUser = email => {
       // console.log(usersEmail, email);

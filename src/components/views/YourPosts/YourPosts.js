@@ -6,6 +6,7 @@ import { NotFound } from '../../views/NotFound/NotFound';
 
 import clsx from 'clsx';
 
+import { fetchPublished } from '../../../redux/postsRedux';
 import { connect } from 'react-redux';
 // import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
 
@@ -41,6 +42,7 @@ Component.propTypes = {
   posts: PropTypes.array,
   props: PropTypes.any,
   isLogged: PropTypes.bool,
+  fetchPublishedPosts: PropTypes.func,
 };
 
 const mapStateToProps = state => ({
@@ -49,7 +51,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  // someAction: arg => dispatch(reduxActionCreator(arg)),
+  fetchPublishedPosts: dispatch(fetchPublished()),
 });
 
 const Container = connect(mapStateToProps, mapDispatchToProps)(Component);

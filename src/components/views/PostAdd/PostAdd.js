@@ -7,117 +7,178 @@ import { NotFound } from '../NotFound/NotFound';
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 
 import clsx from 'clsx';
+import { formatDate } from '../../utils/formatDate';
 
 import { connect } from 'react-redux';
-// import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
+import {
+  addPostRequest,
+  getRequest,
+  ADD_POST,
+} from '../../../redux/postsRedux';
 
 import TextField from '@mui/material/TextField';
 
 import styles from './PostAdd.module.scss';
 
-const Component = ({ className, icon, isLogged }) => (
-  <div>
-    {isLogged ? (
-      <div className={clsx(className, styles.root)}>
-        <div className={clsx(className, styles.content)}>
-          <div className={clsx(className, styles.head)}>
-            <h3>Nowe ogłoszenie</h3>
-            <Button name="Dodaj ogłoszenie" icon={faPlusCircle} />
-          </div>
-          <div className={clsx(className, styles.inputs)}>
-            <TextField
-              className={clsx(className, styles.input)}
-              // error
-              id="filled-error-helper-text"
-              label="Tytuł ogłoszenia"
-              placeholder="Tytuł ogłoszenia"
-              // helperText="Tytuł jest wymagany"
-              variant="filled"
-              fullWidth={true}
-              minLength={10}
-            />
+class Component extends React.Component {
+  state = {
+    post: { name: '', content: '', email: '', localization: '' },
+    error: null,
+  };
 
-            <TextField
-              className={clsx(className, styles.input)}
-              id="outlined-multiline-static"
-              label="Treść ogłoszenia"
-              multiline
-              rows={8}
-              defaultValue="Kupie/Sprzedam/Zamienię/Wynajmę..."
-              fullWidth={true}
-              minLength={20}
-            />
-          </div>
-        </div>
-        <div className={clsx(className, styles.contact)}>
-          <div>
-            <TextField
-              className={clsx(className, styles.input)}
-              id="outlined-multiline-static"
-              label="E-mail"
-              rows={1}
-              placeholder="example@gmail.com"
-            />
-          </div>
-          <div>
-            <TextField
-              className={clsx(className, styles.input)}
-              id="outlined-multiline-static"
-              label="Telefon"
-              rows={1}
-              placeholder="0 700 880 774"
-            />
-          </div>
-          <div>
-            <TextField
-              className={clsx(className, styles.input)}
-              id="outlined-multiline-static"
-              label="Lokalizacja"
-              rows={1}
-              placeholder="Warszawa"
-            />
-          </div>
-        </div>
-        <div className={clsx(className, styles.dates)}>
-          <div>
-            <TextField
-              className={clsx(className, styles.input)}
-              id="outlined-multiline-static"
-              label="Data publikacji"
-              rows={1}
-              placeholder="01.01.1900"
-            />
-          </div>
-          <div>
-            <h4>Status ogłoszenia:</h4>
-            <p>Szkic</p>
-          </div>
-          <div>
-            <h4>Data ostatniej aktualizacji:</h4>
-            <p>???</p>
-          </div>
-        </div>
+  submitForm = e => {
+    e.preventDefault();
+
+    const { name, content, email, localization } = this.state;
+
+    let error = null;
+
+    if ((!name, !content, !email, !localization))
+      error = 'Musisz wypełnić wymagane pola oznaczone gwiazdką';
+
+    if (name.length < 10) error = 'Tytuł jest za krótki (min. 10 znaków)';
+    if (content.length < 20) error = 'Tytuł jest za krótki (min. 20 znaków)';
+    if (!email.includes('@')) error = 'Zły format adresu e-mail';
+    if (localization.length < 3) error = 'Tytuł jest za krótki (min. 3 znaki)';
+
+    if (!error) {
+      const formData = new FormData();
+
+      for (let key of ['name', 'content', 'email', 'phone', 'localization']) {
+        formData.append(key, this.state[key]);
+      }
+
+      // formData.append('file', photo.file)
+
+      this.adPost(formData);
+      this.setState({ error: null });
+    } else this.setState({ error });
+  };
+
+  render() {
+    const { className, isLogged, request } = this.props;
+    const { submitForm } = this;
+
+    console.log('this.props', this.props);
+    console.log('this.state', this.state);
+    console.log('this', this);
+    return (
+      <div>
+        {isLogged ? (
+          <form className={clsx(className, styles.root)} onSubmit={submitForm}>
+            <div className={clsx(className, styles.content)}>
+              <div className={clsx(className, styles.head)}>
+                <h3>Nowe ogłoszenie</h3>
+                <Button
+                  name="Dodaj ogłoszenie"
+                  icon={faPlusCircle}
+                  type="submit"
+                  to=""
+                />
+              </div>
+              <div className={clsx(className, styles.inputs)}>
+                <TextField
+                  className={clsx(className, styles.input)}
+                  // error
+                  id="filled-error-helper-text"
+                  label="Tytuł ogłoszenia*"
+                  placeholder="Tytuł ogłoszenia"
+                  // helperText="Tytuł jest wymagany"
+                  variant="filled"
+                  fullWidth={true}
+                  minLength={10}
+                  name="name"
+                />
+
+                <TextField
+                  className={clsx(className, styles.input)}
+                  id="outlined-multiline-static"
+                  label="Treść ogłoszenia*"
+                  multiline
+                  rows={8}
+                  placeholder="Kupie/Sprzedam/Zamienię/Wynajmę..."
+                  fullWidth={true}
+                  minLength={20}
+                  name="content"
+                />
+              </div>
+            </div>
+            <div className={clsx(className, styles.contact)}>
+              <div>
+                <TextField
+                  className={clsx(className, styles.input)}
+                  id="outlined-multiline-static"
+                  label="E-mail*"
+                  rows={1}
+                  placeholder="example@gmail.com"
+                  name="email"
+                />
+              </div>
+              <div>
+                <TextField
+                  className={clsx(className, styles.input)}
+                  id="outlined-multiline-static"
+                  label="Telefon"
+                  rows={1}
+                  placeholder="0 700 880 774"
+                  name="phone"
+                />
+              </div>
+              <div>
+                <TextField
+                  className={clsx(className, styles.input)}
+                  id="outlined-multiline-static"
+                  label="Lokalizacja*"
+                  rows={1}
+                  placeholder="Warszawa"
+                  name="localization"
+                />
+              </div>
+            </div>
+            <div className={clsx(className, styles.dates)}>
+              <div>
+                <h4>Data publikacji:</h4>
+                <p>{formatDate(new Date())}</p>
+              </div>
+              <div>
+                <h4>Status ogłoszenia:</h4>
+                <p>Szkic</p>
+              </div>
+              <div>
+                <h4>Data ostatniej aktualizacji:</h4>
+                <p>{formatDate(new Date())}</p>
+              </div>
+            </div>
+            <p className={clsx(className, styles.arsrterisk)}>
+              * Pola oznaczone gwiazdką są wymagane!
+            </p>
+          </form>
+        ) : (
+          <NotFound />
+        )}
       </div>
-    ) : (
-      <NotFound />
-    )}
-  </div>
-);
+    );
+  }
+}
 
 Component.propTypes = {
-  children: PropTypes.node,
+  // children: PropTypes.node,
   className: PropTypes.string,
-  name: PropTypes.string,
-  icon: PropTypes.object,
+  // name: PropTypes.string,
+  // icon: PropTypes.object,
   isLogged: PropTypes.bool,
+  to: PropTypes.string,
+  addPost: PropTypes.func,
+  request: PropTypes.func,
 };
 
 const mapStateToProps = state => ({
   isLogged: state.login.loggedIn,
+  request: getRequest(state, ADD_POST),
 });
 
 const mapDispatchToProps = dispatch => ({
-  // someAction: arg => dispatch(reduxActionCreator(arg)),
+  addPost: data => dispatch(addPostRequest(data)),
 });
 
 const Container = connect(mapStateToProps, mapDispatchToProps)(Component);

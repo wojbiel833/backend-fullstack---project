@@ -16,6 +16,7 @@ import TextField from '@mui/material/TextField';
 
 import styles from './YourPost.module.scss';
 import { NotFound } from '../../views/NotFound/NotFound';
+import { formatDate } from '../../utils/formatDate';
 
 class Component extends React.Component {
   render() {
@@ -70,19 +71,22 @@ class Component extends React.Component {
                   <div>
                     {isAdmin || isUser(email) ? (
                       <div className={clsx(className, styles.buttons)}>
-                        <Button
-                          to=""
-                          className={clsx(className, styles.button)}
-                          name="Edytuj"
-                          icon={faEdit}
-                          onClick={edit}
-                        />
-                        <Button
-                          to=""
-                          className={clsx(className, styles.button)}
-                          name="Zapisz"
-                          icon={faSave}
-                        />
+                        {!editMode ? (
+                          <Button
+                            to={`/post/${id}/edit`}
+                            className={clsx(className, styles.button)}
+                            name="Edytuj"
+                            icon={faEdit}
+                            onClick={edit}
+                          />
+                        ) : (
+                          <Button
+                            to=""
+                            className={clsx(className, styles.button)}
+                            name="Zapisz"
+                            icon={faSave}
+                          />
+                        )}
                       </div>
                     ) : (
                       ''
@@ -157,7 +161,7 @@ class Component extends React.Component {
               </div>
               <div>
                 <h4>Data ostatniej aktualizacji:</h4>
-                <p>???</p>
+                <p>{!editMode ? '???' : formatDate(new Date())}</p>
               </div>
             </div>
           </div>
