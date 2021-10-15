@@ -62,6 +62,7 @@ class Component extends React.Component {
     console.log('this.props', this.props);
     console.log('this.state', this.state);
     console.log('this', this);
+
     return (
       <div>
         {isLogged ? (
@@ -74,6 +75,7 @@ class Component extends React.Component {
                   icon={faPlusCircle}
                   type="submit"
                   to=""
+                  onClick={submitForm}
                 />
               </div>
               <div className={clsx(className, styles.inputs)}>
