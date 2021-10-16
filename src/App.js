@@ -1,6 +1,6 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
 import {
@@ -19,6 +19,7 @@ import { PostContainer } from './components/common/Post/Post';
 import { PostAdd } from './components/views/PostAdd/PostAdd';
 import { NotFound } from './components/views/NotFound/NotFound';
 import { YourPostsContainer } from './components/views/YourPosts/YourPosts';
+import { PickLogInMethod } from './components/views/PickLogInMethod/PickLogInMethod';
 import { YourPostContainer } from './components/common/YourPost/YourPost';
 
 const theme = createTheme({
@@ -44,6 +45,8 @@ const App = () => (
                 path="/post/:id/edit"
                 component={YourPostContainer}
               />
+              <Route path="/auth/google" />
+              <Route path="/auth0/login" component={PickLogInMethod} />
               <Route path="*" component={NotFound} />
             </Switch>
           </MainLayout>

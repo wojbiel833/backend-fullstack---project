@@ -2,8 +2,12 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const mongoose = require('mongoose');
+const passport = require('passport');
+const session = require('express-session');
 
+const passportConfig = require('../config/passport');
 const postsRoutes = require('./routes/posts.routes');
+const authRoutes = require('./routes/auth.routes');
 
 const app = express();
 
@@ -11,9 +15,13 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(session({ secret: 'secretString' }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 /* API ENDPOINTS */
 app.use('/api', postsRoutes);
+app.use('/auth', authRoutes);
 
 /* API ERROR PAGES */
 app.use('/api', (req, res) => {
