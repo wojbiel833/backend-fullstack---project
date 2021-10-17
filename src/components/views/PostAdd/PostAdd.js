@@ -33,7 +33,7 @@ class Component extends React.Component {
 
     let error = null;
 
-    if ((!post.name, !post.content, !post.email, !post.localization))
+    if (!post.name || !post.content || !post.email || !post.localization)
       error = 'Musisz wypełnić wymagane pola oznaczone gwiazdką';
 
     if (post.name.length <= 10) error = 'Tytuł jest za krótki (min. 10 znaków)';
@@ -52,9 +52,14 @@ class Component extends React.Component {
 
       // formData.append('file', photo.file)
 
-      this.adPost(formData);
+      this.adsPost(formData);
       this.setState({ error: null });
-    } else this.setState({ error });
+      console.log('udało się', formData);
+    } else {
+      this.setState({ error });
+
+      console.log('nie udało się');
+    }
   };
 
   render() {

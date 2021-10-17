@@ -2,6 +2,7 @@ const express = require('express');
 const passport = require('passport');
 const router = express.Router();
 
+// GOOGLE routes
 router.get(
   '/google',
   passport.authenticate('google', { scope: ['email', 'profile'] })
@@ -9,10 +10,26 @@ router.get(
 
 router.get(
   '/google/callback',
-  passport.authenticate('google', { failureRedirect: '/user/no-permission' }),
+  passport.authenticate('google', { failureRedirect: '/auth0/login/failure' }),
   (req, res) => {
-    res.redirect('/api/posts');
+    res.redirect('/auth0/login/success');
   }
 );
 
+// FACEBOOK routes
+router.get(
+  '/facebook',
+  passport.authenticate('facebook', { scope: ['email', 'profile'] })
+);
+
+router.get(
+  '/facebook/callback',
+  passport.authenticate('facebook', {
+    failureRedirect: '/auth0/login/failure',
+  }),
+  function (req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/auth0/login/success');
+  }
+);
 module.exports = router;

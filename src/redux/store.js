@@ -18,6 +18,7 @@ export const initialState = {
     requests: [],
   },
   login: { loggedIn: false, email: 'example2@gmail.com', admin: false },
+  facebookUsers: [],
 };
 
 // define reducers

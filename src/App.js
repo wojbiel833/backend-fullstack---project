@@ -21,6 +21,8 @@ import { NotFound } from './components/views/NotFound/NotFound';
 import { YourPostsContainer } from './components/views/YourPosts/YourPosts';
 import { PickLogInMethod } from './components/views/PickLogInMethod/PickLogInMethod';
 import { YourPostContainer } from './components/common/YourPost/YourPost';
+import { Success } from './components/views/Success/Success';
+import { Failure } from './components/views/Failure/Failure';
 
 const theme = createTheme({
   palette: {
@@ -47,6 +49,8 @@ const App = () => (
               />
               <Route path="/auth/google" />
               <Route path="/auth0/login" component={PickLogInMethod} />
+              <Route path="/users/auth0/login/success" component={Success} />
+              <Route path="/users/auth0/login/failure" component={Failure} />
               <Route path="*" component={NotFound} />
             </Switch>
           </MainLayout>
