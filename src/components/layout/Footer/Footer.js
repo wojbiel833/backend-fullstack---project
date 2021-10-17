@@ -11,7 +11,7 @@ import styles from './Footer.module.scss';
 const Component = ({ className, children }) => (
   <div className={clsx(className, styles.root)}>
     <div className={clsx(className, styles.text)}>
-      <h3>Created by: Wojcieh Bielecki</h3>
+      <h3>Created by: Wojciech Bielecki</h3>
       <p>All rights reserved</p>
     </div>
   </div>
