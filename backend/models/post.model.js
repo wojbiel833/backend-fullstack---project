@@ -9,7 +9,7 @@ const postSchema = new mongoose.Schema({
   publicationDate: { type: String, required: true },
   status: { type: String, required: true },
   phone: { type: String },
-  actualisationDate: { type: Number },
+  actualisationDate: { type: String },
 });
 
 module.exports = mongoose.model('Post', postSchema);

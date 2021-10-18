@@ -19,11 +19,51 @@ import { NotFound } from '../../views/NotFound/NotFound';
 import { formatDate } from '../../utils/formatDate';
 
 class Component extends React.Component {
+  state = {
+    post: { name: '', content: '', email: '', localization: '' },
+    error: null,
+  };
+
+  submitForm = e => {
+    e.preventDefault();
+
+    const { post } = this.state;
+
+    let error = null;
+
+    if (!post.name || !post.content || !post.email || !post.localization)
+      error = 'Musisz wypełnić wymagane pola oznaczone gwiazdką';
+
+    if (post.name.length <= 10) error = 'Tytuł jest za krótki (min. 10 znaków)';
+    if (post.content.length <= 20)
+      error = 'Tytuł jest za krótki (min. 20 znaków)';
+    if (!post.email.includes('@')) error = 'Zły format adresu e-mail';
+    if (post.localization.length <= 3)
+      error = 'Nazwa lokaliozacji jest za krótka (min. 3 znaki)';
+
+    if (!error) {
+      const formData = new FormData();
+
+      for (let key of ['name', 'content', 'email', 'phone', 'localization']) {
+        formData.append(key, this.state[key]);
+      }
+
+      // formData.append('file', photo.file)
+
+      this.adsPost(formData);
+      this.setState({ error: null });
+      console.log('udało się', formData);
+    } else {
+      this.setState({ error });
+
+      console.log('nie udało się');
+    }
+  };
+
   render() {
     // console.log(this.props);
     const {
       className,
-
       isLogged,
       isAdmin,
       usersEmail,
@@ -34,10 +74,11 @@ class Component extends React.Component {
       phone,
       localization,
       publicationDate,
-
       editMode,
       edit,
     } = this.props;
+
+    const { submitForm } = this;
 
     const isUser = email => {
       // console.log(usersEmail, email);
@@ -63,7 +104,7 @@ class Component extends React.Component {
     return (
       <div>
         {(isLogged && isUser(email)) || (isLogged && isAdmin) ? (
-          <div className={clsx(className, styles.root)}>
+          <form className={clsx(className, styles.root)} onSubmit={submitForm}>
             <div className={clsx(className, styles.content)}>
               <div className={clsx(className, styles.head)}>
                 <h3>Ogłoszenie nr {id}</h3>
@@ -164,7 +205,7 @@ class Component extends React.Component {
                 <p>{!editMode ? '???' : formatDate(new Date())}</p>
               </div>
             </div>
-          </div>
+          </form>
         ) : isLogged ? (
           ''
         ) : (

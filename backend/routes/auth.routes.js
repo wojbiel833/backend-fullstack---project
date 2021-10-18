@@ -10,9 +10,9 @@ router.get(
 
 router.get(
   '/google/callback',
-  passport.authenticate('google', { failureRedirect: '/auth0/login/failure' }),
+  passport.authenticate('google', { failureRedirect: '/login/failure' }),
   (req, res) => {
-    res.redirect('/auth0/login/success');
+    res.redirect('/login/success');
   }
 );
 
@@ -25,11 +25,11 @@ router.get(
 router.get(
   '/facebook/callback',
   passport.authenticate('facebook', {
-    failureRedirect: '/auth0/login/failure',
+    failureRedirect: '/login/failure',
   }),
   function (req, res) {
     // Successful authentication, redirect home.
-    res.redirect('/auth0/login/success');
+    res.redirect('/login/success');
   }
 );
 module.exports = router;

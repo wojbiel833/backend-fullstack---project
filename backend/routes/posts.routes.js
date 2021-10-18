@@ -42,20 +42,81 @@ router.post('/post/add', async (req, res) => {
       status,
     } = req.body;
 
-    const newPost = new Post({
-      id: id,
-      name: name,
-      content: content,
-      email: email,
-      phone: phone,
-      localization: localization,
-      publicationDate: publicationDate,
-      actualisationDate: actualisationDate,
-      status: status,
-    });
+    let error;
+    if (!name || !content || !email || !localization)
+      error = 'Musisz wypełnić wymagane pola oznaczone gwiazdką';
 
-    await newPost.save();
-    res.json({ message: 'OK', post: newPost });
+    if (name.length <= 10) error = 'Tytuł jest za krótki (min. 10 znaków)';
+    if (content.length <= 20) error = 'Tytuł jest za krótki (min. 20 znaków)';
+    // if (!email.includes('@')) error = 'Zły format adresu e-mail';
+    if (localization.length <= 3)
+      error = 'Nazwa lokaliozacji jest za krótka (min. 3 znaki)';
+
+    if (!error) {
+      const newPost = new Post({
+        id: id,
+        name: name,
+        content: content,
+        email: email,
+        phone: phone,
+        localization: localization,
+        publicationDate: publicationDate,
+        actualisationDate: actualisationDate,
+        status: status,
+      });
+
+      await newPost.save();
+      res.json({ message: 'OK', post: newPost });
+    } else res.json({ message: error });
+  } catch (err) {
+    res.status(500).json({ message: err });
+  }
+});
+router.post('/post/:id/edit', async (req, res) => {
+  const {
+    name,
+    content,
+    email,
+    phone,
+    localization,
+    publicationDate,
+    actualisationDate,
+    status,
+  } = req.body;
+
+  try {
+    const post = await Post.findById(req.params.id);
+
+    let error;
+    if (!name || !content || !email || !localization)
+      error = 'Musisz wypełnić wymagane pola oznaczone gwiazdką';
+
+    if (name.length <= 10) error = 'Tytuł jest za krótki (min. 10 znaków)';
+    if (content.length <= 20) error = 'Tytuł jest za krótki (min. 20 znaków)';
+    if (!email.includes('@')) error = 'Zły format adresu e-mail';
+    if (localization.length <= 3)
+      error = 'Nazwa lokaliozacji jest za krótka (min. 3 znaki)';
+
+    if (!error) {
+      if (post) {
+        await Post.updateOne(
+          { id: req.params.id },
+          {
+            $set: {
+              name: name,
+              content: content,
+              email: email,
+              phone: phone,
+              localization: localization,
+              publicationDate: publicationDate,
+              actualisationDate: actualisationDate,
+              status: status,
+            },
+          }
+        );
+        res.json(`Post ${post} has been changed!`);
+      } else res.status(404).json({ message: 'Not found...' });
+    } else res.status(404).json({ message: error });
   } catch (err) {
     res.status(500).json({ message: err });
   }

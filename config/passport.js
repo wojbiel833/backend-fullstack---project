@@ -1,9 +1,7 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
-// User object?
-// const User = require('../src/redux/store').initialState.facebookUsers;
-// const User = {};
+const User = require('../backend/models/user.model');
 
 // Google 0Auth2.0
 passport.use(

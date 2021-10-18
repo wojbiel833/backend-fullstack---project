@@ -63,7 +63,8 @@ class Component extends React.Component {
   };
 
   render() {
-    const { className, isLogged, request } = this.props;
+    const { className, isLogged, actualisationDate, publicationDate, request } =
+      this.props;
     const { submitForm } = this;
 
     console.log('this.props', this.props);
@@ -155,7 +156,11 @@ class Component extends React.Component {
               </div>
               <div>
                 <h4>Data ostatniej aktualizacji:</h4>
-                <p>{formatDate(new Date())}</p>
+                <p>
+                  {actualisationDate === publicationDate
+                    ? formatDate(new Date())
+                    : actualisationDate}
+                </p>
               </div>
             </div>
             <p className={clsx(className, styles.arsrterisk)}>
@@ -179,11 +184,15 @@ Component.propTypes = {
   to: PropTypes.string,
   addPost: PropTypes.func,
   request: PropTypes.func,
+  posts: PropTypes.array,
+  actualisationDate: PropTypes.string,
+  publicationDate: PropTypes.string,
 };
 
 const mapStateToProps = state => ({
   isLogged: state.login.loggedIn,
   request: getRequest(state, ADD_POST),
+  posts: state.posts.data,
 });
 
 const mapDispatchToProps = dispatch => ({
