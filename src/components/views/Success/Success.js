@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import clsx from 'clsx';
 
-// import { connect } from 'react-redux';
+import { createActionLogIn } from '../../../redux/navbarRedux.js';
+import { connect } from 'react-redux';
 // import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
 
 import Box from '@mui/material/Box';
@@ -24,8 +25,11 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
-const Component = ({ className, children }) => {
-  const [open, setOpen] = React.useState(false);
+const Component = ({ className, children, logIn }) => {
+  useEffect(() => {
+    logIn();
+  }, []);
+  const [open, setOpen] = React.useState(true);
   // const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -50,20 +54,21 @@ const Component = ({ className, children }) => {
 Component.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
+  logIn: PropTypes.func,
 };
 
 // const mapStateToProps = state => ({
-//   someProp: reduxSelector(state),
+//   //   someProp: reduxSelector(state),
 // });
 
-// const mapDispatchToProps = dispatch => ({
-//   someAction: arg => dispatch(reduxActionCreator(arg)),
-// });
+const mapDispatchToProps = dispatch => ({
+  logIn: () => dispatch(createActionLogIn(true)),
+});
 
-// const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
+const Container = connect(null, mapDispatchToProps)(Component);
 
 export {
-  Component as Success,
-  // Container as SuccessContainer,
+  // Component as Success,
+  Container as Success,
   Component as SuccessComponent,
 };

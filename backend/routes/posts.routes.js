@@ -19,6 +19,7 @@ router.get('/posts', async (req, res) => {
 });
 
 router.get('/posts/:id', async (req, res) => {
+  console.log('asw');
   try {
     const result = await Post.findById(req.params.id);
     if (!result) res.status(404).json({ post: 'Not found' });
@@ -72,7 +73,9 @@ router.post('/post/add', async (req, res) => {
     res.status(500).json({ message: err });
   }
 });
-router.post('/post/:id/edit', async (req, res) => {
+
+router.put('/post/:id/edit', async (req, res) => {
+  console.log('aaas');
   const {
     name,
     content,
@@ -85,6 +88,7 @@ router.post('/post/:id/edit', async (req, res) => {
   } = req.body;
 
   try {
+    console.log(req.params.id, 'aaa');
     const post = await Post.findById(req.params.id);
 
     let error;

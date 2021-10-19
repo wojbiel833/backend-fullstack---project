@@ -5,6 +5,7 @@ import clsx from 'clsx';
 
 // import { connect } from 'react-redux';
 // import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
+import GoogleButton from 'react-google-button';
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -45,7 +46,12 @@ const Component = ({ className, children }) => {
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             <div>
-              <div
+              <GoogleButton
+                onClick={() => {
+                  window.location = 'http://localhost:8000/auth/google';
+                }}
+              />
+              {/* <div
                 className="col s12 m6 offset-m3 center-align"
                 style={{
                   margin: 'auto',
@@ -55,7 +61,7 @@ const Component = ({ className, children }) => {
               >
                 <a
                   className="oauth-container btn darken-4 white black-text"
-                  href="/auth/google"
+                  href="http://localhost:8000/auth/google"
                   style={{
                     textTransform: 'none',
                     fontSize: '17px',
@@ -73,7 +79,7 @@ const Component = ({ className, children }) => {
                   </div>
                   Kontynuuj przy uzyciu Google
                 </a>
-              </div>
+              </div> */}
               <br />
               <div
                 className={clsx(className, styles.loginBtn, 'fb-login-button')}

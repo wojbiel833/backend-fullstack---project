@@ -22,8 +22,15 @@ import styles from './PostAdd.module.scss';
 
 class Component extends React.Component {
   state = {
-    post: { name: '', content: '', email: '', localization: '' },
+    post: { name: '', content: '', email: '', phone: '', localization: '' },
     error: null,
+  };
+
+  setPostParam = (name, value) => {
+    this.setState({
+      ...this.state,
+      post: { ...this.state.post, [name]: value },
+    });
   };
 
   submitForm = e => {
@@ -41,7 +48,7 @@ class Component extends React.Component {
       error = 'Tytuł jest za krótki (min. 20 znaków)';
     if (!post.email.includes('@')) error = 'Zły format adresu e-mail';
     if (post.localization.length <= 3)
-      error = 'Nazwa lokaliozacji jest za krótka (min. 3 znaki)';
+      error = 'Nazwa lokalizacji jest za krótka (min. 3 znaki)';
 
     if (!error) {
       const formData = new FormData();
@@ -52,7 +59,7 @@ class Component extends React.Component {
 
       // formData.append('file', photo.file)
 
-      this.adsPost(formData);
+      this.props.addPost(formData);
       this.setState({ error: null });
       console.log('udało się', formData);
     } else {
@@ -63,8 +70,14 @@ class Component extends React.Component {
   };
 
   render() {
-    const { className, isLogged, actualisationDate, publicationDate, request } =
-      this.props;
+    const {
+      className,
+      isLogged,
+      actualisationDate,
+      publicationDate,
+      request,
+      addPost,
+    } = this.props;
     const { submitForm } = this;
 
     console.log('this.props', this.props);
@@ -98,6 +111,8 @@ class Component extends React.Component {
                   fullWidth={true}
                   minLength={10}
                   name="name"
+                  value={this.state.post.name}
+                  onChange={e => this.setPostParam('name', e.target.value)}
                 />
 
                 <TextField
@@ -110,6 +125,8 @@ class Component extends React.Component {
                   fullWidth={true}
                   minLength={20}
                   name="content"
+                  value={this.state.post.content}
+                  onChange={e => this.setPostParam('content', e.target.value)}
                 />
               </div>
             </div>
@@ -122,6 +139,8 @@ class Component extends React.Component {
                   rows={1}
                   placeholder="example@gmail.com"
                   name="email"
+                  value={this.state.post.email}
+                  onChange={e => this.setPostParam('email', e.target.value)}
                 />
               </div>
               <div>
@@ -132,6 +151,8 @@ class Component extends React.Component {
                   rows={1}
                   placeholder="0 700 880 774"
                   name="phone"
+                  value={this.state.post.phone}
+                  onChange={e => this.setPostParam('phone', e.target.value)}
                 />
               </div>
               <div>
@@ -142,6 +163,10 @@ class Component extends React.Component {
                   rows={1}
                   placeholder="Warszawa"
                   name="localization"
+                  value={this.state.post.localization}
+                  onChange={e =>
+                    this.setPostParam('localization', e.target.value)
+                  }
                 />
               </div>
             </div>
@@ -183,7 +208,7 @@ Component.propTypes = {
   isLogged: PropTypes.bool,
   to: PropTypes.string,
   addPost: PropTypes.func,
-  request: PropTypes.func,
+  request: PropTypes.object,
   posts: PropTypes.array,
   actualisationDate: PropTypes.string,
   publicationDate: PropTypes.string,

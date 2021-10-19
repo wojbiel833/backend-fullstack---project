@@ -13,11 +13,12 @@ import { connect } from 'react-redux';
 import styles from './Announcements.module.scss';
 
 class Component extends React.Component {
-  // componentDidMount() {
-  //   console.log(this.props);
-  // const { fetchPublishedPosts } = this.props;
-  // fetchPublishedPosts();
-  // }
+  componentDidMount() {
+    console.log(this.props);
+    const { fetchPublishedPosts } = this.props;
+    fetchPublishedPosts();
+  }
+
   render() {
     const { className, children, posts, isLogged } = this.props;
     // console.log(posts);
@@ -50,7 +51,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchPublishedPosts: dispatch(fetchPublished()),
+  fetchPublishedPosts: () => dispatch(fetchPublished()),
 });
 
 const Container = connect(mapStateToProps, mapDispatchToProps)(Component);

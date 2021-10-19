@@ -47,11 +47,9 @@ const App = () => (
                 path="/post/:id/edit"
                 component={YourPostContainer}
               />
-              <Route path="/auth/google" />
-              <Route path="/auth/facebook" />
-              <Route path="/auth0/login" component={PickLogInMethod} />
-              <Route path="/auth/login/success" component={Success} />
-              <Route path="/auth/login/failure" component={Failure} />
+              <Route exact path="/auth0/login" component={PickLogInMethod} />
+              <Route exact path="/login/success" component={Success} />
+              <Route exact path="/login/failure" component={Failure} />
               <Route path="*" component={NotFound} />
             </Switch>
           </MainLayout>
