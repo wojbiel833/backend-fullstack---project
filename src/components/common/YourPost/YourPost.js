@@ -7,7 +7,11 @@ import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { faSave } from '@fortawesome/free-solid-svg-icons';
 
 import clsx from 'clsx';
-import { getPostsForAnnouncements, editPost } from '../../../redux/postsRedux';
+import {
+  getPostsForAnnouncements,
+  editPost,
+  updatePostRequest,
+} from '../../../redux/postsRedux';
 
 import { connect } from 'react-redux';
 // import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
@@ -22,6 +26,13 @@ class Component extends React.Component {
   state = {
     post: { name: '', content: '', email: '', localization: '' },
     error: null,
+  };
+
+  setPostParam = (name, value) => {
+    this.setState({
+      ...this.state,
+      post: { ...this.state.post, [name]: value },
+    });
   };
 
   submitForm = e => {
@@ -39,7 +50,7 @@ class Component extends React.Component {
       error = 'Tytuł jest za krótki (min. 20 znaków)';
     if (!post.email.includes('@')) error = 'Zły format adresu e-mail';
     if (post.localization.length <= 3)
-      error = 'Nazwa lokaliozacji jest za krótka (min. 3 znaki)';
+      error = 'Nazwa lokalizacji jest za krótka (min. 3 znaki)';
 
     if (!error) {
       const formData = new FormData();
@@ -50,7 +61,7 @@ class Component extends React.Component {
 
       // formData.append('file', photo.file)
 
-      this.adsPost(formData);
+      this.props.updatePost(formData);
       this.setState({ error: null });
       console.log('udało się', formData);
     } else {
@@ -75,7 +86,8 @@ class Component extends React.Component {
       localization,
       publicationDate,
       editMode,
-      edit,
+      editStart,
+      editStop,
     } = this.props;
 
     const { submitForm } = this;
@@ -118,7 +130,7 @@ class Component extends React.Component {
                             className={clsx(className, styles.button)}
                             name="Edytuj"
                             icon={faEdit}
-                            onClick={edit}
+                            onClick={editStart}
                           />
                         ) : (
                           <Button
@@ -126,6 +138,8 @@ class Component extends React.Component {
                             className={clsx(className, styles.button)}
                             name="Zapisz"
                             icon={faSave}
+                            onClick={editStop}
+                            type="submit"
                           />
                         )}
                       </div>
@@ -143,23 +157,29 @@ class Component extends React.Component {
                   // error
                   id="filled-error-helper-text"
                   label="Tytuł ogłoszenia"
-                  value={name}
+                  // value={name}
                   variant="filled"
                   fullWidth={true}
                   minLength={10}
                   disabled={!editMode}
+                  value={!editMode ? name : this.state.post.name}
+                  onChange={e => this.setPostParam('name', e.target.value)}
+                  placeholder={name}
                 />
 
                 <TextField
                   className={clsx(className, styles.input)}
                   id="outlined-multiline-static"
                   label="Treść ogłoszenia"
-                  value={content}
+                  // value={content}
                   multiline
                   rows={8}
                   fullWidth={true}
                   minLength={20}
                   disabled={!editMode}
+                  value={!editMode ? content : this.state.post.content}
+                  onChange={e => this.setPostParam('content', e.target.value)}
+                  placeholder={content}
                 />
               </div>
             </div>
@@ -176,8 +196,11 @@ class Component extends React.Component {
                   id="outlined-multiline-static"
                   label="Telefon"
                   rows={1}
-                  value={phone}
+                  // value={phone}
                   disabled={!editMode}
+                  value={!editMode ? phone : this.state.post.phone}
+                  onChange={e => this.setPostParam('phone', e.target.value)}
+                  placeholder={phone}
                 />
               </div>
               <div>
@@ -186,8 +209,15 @@ class Component extends React.Component {
                   id="outlined-multiline-static"
                   label="Lokalizacja"
                   rows={1}
-                  value={localization}
+                  // value={localization}
                   disabled={!editMode}
+                  value={
+                    !editMode ? localization : this.state.post.localization
+                  }
+                  onChange={e =>
+                    this.setPostParam('localization', e.target.value)
+                  }
+                  placeholder={localization}
                 />
               </div>
             </div>
@@ -198,7 +228,7 @@ class Component extends React.Component {
               </div>
               <div>
                 <h4>Status ogłoszenia:</h4>
-                <p>Szkic</p>
+                <p>{!editMode ? 'Opuiblikowane' : 'Szkic'}</p>
               </div>
               <div>
                 <h4>Data ostatniej aktualizacji:</h4>
@@ -231,7 +261,9 @@ Component.propTypes = {
   phone: PropTypes.string,
   localization: PropTypes.string,
   publicationDate: PropTypes.string,
-  edit: PropTypes.func,
+  editStart: PropTypes.func,
+  editStop: PropTypes.func,
+  updatePost: PropTypes.func,
 };
 
 const mapStateToProps = (state, props) => {
@@ -257,7 +289,9 @@ const mapStateToProps = (state, props) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  edit: () => dispatch(editPost(true)),
+  editStart: () => dispatch(editPost(true)),
+  editStop: () => dispatch(editPost(false)),
+  updatePost: data => dispatch(updatePostRequest(data)),
 });
 
 const Container = connect(mapStateToProps, mapDispatchToProps)(Component);

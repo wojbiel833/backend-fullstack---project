@@ -17,7 +17,7 @@ export const initialState = {
     },
     requests: [],
   },
-  login: { loggedIn: false, email: 'example2@gmail.com', admin: false },
+  login: { loggedIn: true, email: 'example2@gmail.com', admin: false },
   // facebookUsers: [],
 };
 

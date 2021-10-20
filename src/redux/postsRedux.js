@@ -81,6 +81,23 @@ export const addPostRequest = data => {
   };
 };
 
+export const updatePostRequest = data => {
+  return async dispatch => {
+    dispatch(startRequest({ name: ADD_POST }));
+    try {
+      let res = await Axios.put(`${API_URL}/posts`, data, {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+      });
+      dispatch(addPost(res.data));
+      dispatch(endRequest({ name: ADD_POST }));
+    } catch (e) {
+      dispatch(errorRequest({ name: ADD_POST, error: e.message }));
+    }
+  };
+};
+
 /* reducer */
 export const reducer = (statePart = [], action = {}) => {
   switch (action.type) {

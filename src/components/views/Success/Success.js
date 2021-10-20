@@ -29,6 +29,7 @@ const Component = ({ className, children, logIn }) => {
   useEffect(() => {
     logIn();
   }, []);
+
   const [open, setOpen] = React.useState(true);
   // const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
