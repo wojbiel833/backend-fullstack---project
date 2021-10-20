@@ -1,17 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import { Link } from 'react-router-dom';
 import clsx from 'clsx';
+
+import { Icon } from '../Icon/Icon';
 
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
-import { Link } from 'react-router-dom';
-
-// import { connect } from 'react-redux';
-// import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
-
 import styles from './Button.module.scss';
-import { Icon } from '../Icon/Icon';
 
 const StyledButton = styled(Button)(({ theme }) => ({
   color: '#FFFFFF',
@@ -48,18 +44,4 @@ Component.propTypes = {
   to: PropTypes.string,
 };
 
-// const mapStateToProps = state => ({
-//   someProp: reduxSelector(state),
-// });
-
-// const mapDispatchToProps = dispatch => ({
-//   someAction: arg => dispatch(reduxActionCreator(arg)),
-// });
-
-// const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
-
-export {
-  Component as Button,
-  // Container as ButtonContainer,
-  Component as ButtonComponent,
-};
+export { Component as Button, Component as ButtonComponent };

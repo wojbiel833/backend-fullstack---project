@@ -6,11 +6,11 @@ const Post = require('../models/post.model');
 
 router.get('/posts', async (req, res) => {
   try {
-    const result = await Post.find({ status: 'Opublikowane' });
-    // .select(
-    //   'id name content email phone localization publicationDate actualisationDate status'
-    // )
-    // .sort({ created: -1 });
+    const result = await Post.find({ status: 'Opublikowane' })
+      .select(
+        'id name content email phone localization publicationDate actualisationDate status'
+      )
+      .sort({ created: -1 });
     if (!result) res.status(404).json({ post: 'Not found' });
     else res.json(result);
   } catch (err) {
@@ -49,7 +49,7 @@ router.post('/post/add', async (req, res) => {
 
     if (name.length <= 10) error = 'Tytuł jest za krótki (min. 10 znaków)';
     if (content.length <= 20) error = 'Tytuł jest za krótki (min. 20 znaków)';
-    // if (!email.includes('@')) error = 'Zły format adresu e-mail';
+    if (!email.includes('@')) error = 'Zły format adresu e-mail';
     if (localization.length <= 3)
       error = 'Nazwa lokaliozacji jest za krótka (min. 3 znaki)';
 

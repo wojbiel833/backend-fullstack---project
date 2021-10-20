@@ -1,17 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import clsx from 'clsx';
-
-// import { connect } from 'react-redux';
-// import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
-
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-
-import styles from './Failure.module.scss';
+// import styles from './Failure.module.scss';
 
 const style = {
   position: 'absolute',
@@ -26,7 +19,6 @@ const style = {
 };
 const Component = ({ className, children }) => {
   const [open, setOpen] = React.useState(true);
-  // const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   return (
@@ -52,18 +44,4 @@ Component.propTypes = {
   className: PropTypes.string,
 };
 
-// const mapStateToProps = state => ({
-//   someProp: reduxSelector(state),
-// });
-
-// const mapDispatchToProps = dispatch => ({
-//   someAction: arg => dispatch(reduxActionCreator(arg)),
-// });
-
-// const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
-
-export {
-  Component as Failure,
-  // Container as FailureContainer,
-  Component as FailureComponent,
-};
+export { Component as Failure, Component as FailureComponent };

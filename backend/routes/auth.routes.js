@@ -28,7 +28,6 @@ router.get(
     failureRedirect: '/login/failure',
   }),
   function (req, res) {
-    // Successful authentication, redirect home.
     res.redirect('/login/success');
   }
 );

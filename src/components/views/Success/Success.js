@@ -1,18 +1,14 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import clsx from 'clsx';
-
 import { createActionLogIn } from '../../../redux/navbarRedux.js';
 import { connect } from 'react-redux';
-// import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
 
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 
-import styles from './Success.module.scss';
+// import styles from './Success.module.scss';
 
 const style = {
   position: 'absolute',
@@ -31,7 +27,6 @@ const Component = ({ className, children, logIn }) => {
   }, []);
 
   const [open, setOpen] = React.useState(true);
-  // const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   return (
@@ -58,18 +53,10 @@ Component.propTypes = {
   logIn: PropTypes.func,
 };
 
-// const mapStateToProps = state => ({
-//   //   someProp: reduxSelector(state),
-// });
-
 const mapDispatchToProps = dispatch => ({
   logIn: () => dispatch(createActionLogIn(true)),
 });
 
 const Container = connect(null, mapDispatchToProps)(Component);
 
-export {
-  // Component as Success,
-  Container as Success,
-  Component as SuccessComponent,
-};
+export { Container as Success, Component as SuccessComponent };

@@ -15,10 +15,16 @@ describe('Component Announcements', () => {
         publicationDate: 'publicationDate',
         actualisationDate: 'actualisationDate',
         status: 'status',
+        fetchPublishedPost: function () {},
       },
     ];
 
-    const component = shallow(<AnnouncementsComponent posts={posts} />);
+    const component = shallow(
+      <AnnouncementsComponent
+        fetchPublishedPost={posts.fetchPublishedPost}
+        posts={posts}
+      />
+    );
     expect(component).toBeTruthy();
   });
 });

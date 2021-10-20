@@ -1,19 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import clsx from 'clsx';
 
 import { HeaderContainer } from '../Header/Header';
 import { Footer } from '../Footer/Footer';
 import { NavBarContainer } from '../../features/NavBar/NavBar';
 
-import clsx from 'clsx';
-
-// import { connect } from 'react-redux';
-// import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
-
 import CssBaseline from '@mui/material/CssBaseline';
-// import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-
 import styles from './MainLayout.module.scss';
 
 const Component = ({ className, children }) => (
@@ -23,7 +17,6 @@ const Component = ({ className, children }) => (
     <React.Fragment>
       <CssBaseline />
       <Container maxWidth="lg" fixed>
-        {/* <Box sx={{ bgcolor: '#cfe8fc', height: '100vh' }} /> */}
         {children}
       </Container>
     </React.Fragment>
@@ -37,18 +30,4 @@ Component.propTypes = {
   props: PropTypes.any,
 };
 
-// const mapStateToProps = state => ({
-//   someProp: reduxSelector(state),
-// });
-
-// const mapDispatchToProps = dispatch => ({
-//   someAction: arg => dispatch(reduxActionCreator(arg)),
-// });
-
-// const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
-
-export {
-  Component as MainLayout,
-  // Container as MainLayoutContainer,
-  Component as MainLayoutComponent,
-};
+export { Component as MainLayout, Component as MainLayoutComponent };

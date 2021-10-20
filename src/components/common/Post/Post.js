@@ -1,30 +1,17 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import clsx from 'clsx';
 
 import { Button } from '../Button/Button';
 
+import { getPostsForAnnouncements } from '../../../redux/postsRedux';
+
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
-
-import clsx from 'clsx';
-
-import {
-  getPostsForAnnouncements,
-  fetchPublished,
-} from '../../../redux/postsRedux';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-
-// import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
-
 import styles from './Post.module.scss';
 
 class Component extends React.Component {
-  componentDidMount() {
-    // console.log(this.props);
-    const { fetchPublishedPosts } = this.props;
-    // fetchPublishedPosts();
-  }
-
   render() {
     const {
       className,
@@ -42,10 +29,8 @@ class Component extends React.Component {
       status,
       match,
     } = this.props;
-    // console.log(this.props);
 
     const isUser = email => {
-      // console.log(usersEmail, email);
       if (usersEmail === email) return true;
     };
 
@@ -53,18 +38,6 @@ class Component extends React.Component {
     if (match) {
       pageUrl = match.url;
     }
-    // console.log(
-    //   id,
-    //   name,
-    //   content,
-    //   email,
-    //   phone,
-    //   localization,
-    //   publicationDate,
-    //   actualisationDate,
-    //   status
-    // );
-    // console.log(match.url);
 
     return (
       <div className={clsx(className, styles.root)}>
@@ -81,7 +54,12 @@ class Component extends React.Component {
                   </Link>
                 )}
                 {isAdmin || isUser(email) ? (
-                  <Button to={`/post/${id}/edit`} name="Edytuj" icon={faEdit} />
+                  <Button
+                    className="Button"
+                    to={`/post/${id}/edit`}
+                    name="Edytuj"
+                    icon={faEdit}
+                  />
                 ) : (
                   ''
                 )}
@@ -163,14 +141,6 @@ const mapStateToProps = (state, props) => {
   };
 };
 
-const mapDispatchToProps = dispatch => ({
-  fetchPublishedPosts: dispatch(fetchPublished()),
-});
+const Container = connect(mapStateToProps, null)(Component);
 
-const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
-
-export {
-  // Component as Post,
-  Container as PostContainer,
-  Component as PostComponent,
-};
+export { Container as PostContainer, Component as PostComponent };

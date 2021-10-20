@@ -1,34 +1,37 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import clsx from 'clsx';
 
 import { YourPostContainer } from '../../common/YourPost/YourPost';
 import { NotFound } from '../../views/NotFound/NotFound';
 
-import clsx from 'clsx';
-
 import { fetchPublished } from '../../../redux/postsRedux';
 import { connect } from 'react-redux';
-// import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
 
 import styles from './YourPosts.module.scss';
 
 const Component = ({ className, children, email, posts, isLogged }) => {
   return (
-    // isUser
     <div>
       {isLogged ? (
         <div className={clsx(className, styles.root)}>
           <div className={clsx(className, styles.announcements)}>
             <h2>Twoje ogłoszenia</h2>
             {posts.email === 'undefined' || !email ? (
-              posts.map(post => <YourPostContainer key={post.id} {...post} />)
+              posts.map(post => (
+                <YourPostContainer
+                  className="YourPost"
+                  key={post.id}
+                  {...post}
+                />
+              ))
             ) : (
               <div>Twoje ogłoszenia są puste.</div>
             )}
           </div>
         </div>
       ) : (
-        <NotFound />
+        <NotFound className="NotFound" />
       )}
     </div>
   );
@@ -56,8 +59,4 @@ const mapDispatchToProps = dispatch => ({
 
 const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
 
-export {
-  // Component as YourPosts,
-  Container as YourPostsContainer,
-  Component as YourPostsComponent,
-};
+export { Container as YourPostsContainer, Component as YourPostsComponent };

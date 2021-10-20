@@ -2,9 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Button } from '../Button/Button';
-
-import { faEdit } from '@fortawesome/free-solid-svg-icons';
-import { faSave } from '@fortawesome/free-solid-svg-icons';
+import { NotFound } from '../../views/NotFound/NotFound';
+import { formatDate } from '../../utils/formatDate';
 
 import clsx from 'clsx';
 import {
@@ -14,13 +13,11 @@ import {
 } from '../../../redux/postsRedux';
 
 import { connect } from 'react-redux';
-// import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
 
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import { faSave } from '@fortawesome/free-solid-svg-icons';
 import TextField from '@mui/material/TextField';
-
 import styles from './YourPost.module.scss';
-import { NotFound } from '../../views/NotFound/NotFound';
-import { formatDate } from '../../utils/formatDate';
 
 class Component extends React.Component {
   state = {
@@ -59,8 +56,6 @@ class Component extends React.Component {
         formData.append(key, this.state[key]);
       }
 
-      // formData.append('file', photo.file)
-
       this.props.updatePost(formData);
       this.setState({ error: null });
       console.log('udało się', formData);
@@ -72,7 +67,6 @@ class Component extends React.Component {
   };
 
   render() {
-    // console.log(this.props);
     const {
       className,
       isLogged,
@@ -93,25 +87,8 @@ class Component extends React.Component {
     const { submitForm } = this;
 
     const isUser = email => {
-      // console.log(usersEmail, email);
       if (usersEmail === email) return true;
     };
-
-    // console.log(
-    //   id,
-    //   name,
-    //   content,
-    //   email,
-    //   phone,
-    //   localization,
-    //   publicationDate,
-    //   actualisationDate,
-    //   status,
-    //   editMode,
-    //   edit
-    // );
-    // console.log(match);
-    // console.log(isLogged, isUser(email));
 
     return (
       <div>
@@ -154,10 +131,8 @@ class Component extends React.Component {
               <div className={clsx(className, styles.inputs)}>
                 <TextField
                   className={clsx(className, styles.input)}
-                  // error
                   id="filled-error-helper-text"
-                  label="Tytuł ogłoszenia"
-                  // value={name}
+                  label="Tytuł ogłoszenia*"
                   variant="filled"
                   fullWidth={true}
                   minLength={10}
@@ -170,8 +145,7 @@ class Component extends React.Component {
                 <TextField
                   className={clsx(className, styles.input)}
                   id="outlined-multiline-static"
-                  label="Treść ogłoszenia"
-                  // value={content}
+                  label="Treść ogłoszenia*"
                   multiline
                   rows={8}
                   fullWidth={true}
@@ -196,7 +170,6 @@ class Component extends React.Component {
                   id="outlined-multiline-static"
                   label="Telefon"
                   rows={1}
-                  // value={phone}
                   disabled={!editMode}
                   value={!editMode ? phone : this.state.post.phone}
                   onChange={e => this.setPostParam('phone', e.target.value)}
@@ -207,9 +180,8 @@ class Component extends React.Component {
                 <TextField
                   className={clsx(className, styles.input)}
                   id="outlined-multiline-static"
-                  label="Lokalizacja"
+                  label="Lokalizacja*"
                   rows={1}
-                  // value={localization}
                   disabled={!editMode}
                   value={
                     !editMode ? localization : this.state.post.localization
@@ -235,6 +207,9 @@ class Component extends React.Component {
                 <p>{!editMode ? '???' : formatDate(new Date())}</p>
               </div>
             </div>
+            <p className={clsx(className, styles.arsrterisk)}>
+              * Pola oznaczone gwiazdką są wymagane!
+            </p>
           </form>
         ) : isLogged ? (
           ''
@@ -267,8 +242,6 @@ Component.propTypes = {
 };
 
 const mapStateToProps = (state, props) => {
-  // console.log(props);
-
   let postParams = {};
   let id;
 
@@ -296,8 +269,4 @@ const mapDispatchToProps = dispatch => ({
 
 const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
 
-export {
-  // Component as YourPost,
-  Container as YourPostContainer,
-  Component as YourPostComponent,
-};
+export { Container as YourPostContainer, Component as YourPostComponent };

@@ -1,12 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import clsx from 'clsx';
 
 import { Button } from '../../common/Button/Button';
 import { NotFound } from '../NotFound/NotFound';
-
-import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
-
-import clsx from 'clsx';
 import { formatDate } from '../../utils/formatDate';
 
 import { connect } from 'react-redux';
@@ -16,8 +13,8 @@ import {
   ADD_POST,
 } from '../../../redux/postsRedux';
 
+import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import TextField from '@mui/material/TextField';
-
 import styles from './PostAdd.module.scss';
 
 class Component extends React.Component {
@@ -57,8 +54,6 @@ class Component extends React.Component {
         formData.append(key, this.state[key]);
       }
 
-      // formData.append('file', photo.file)
-
       this.props.addPost(formData);
       this.setState({ error: null });
       console.log('udało się', formData);
@@ -70,20 +65,9 @@ class Component extends React.Component {
   };
 
   render() {
-    const {
-      className,
-      isLogged,
-      actualisationDate,
-      publicationDate,
-      request,
-      addPost,
-    } = this.props;
+    const { className, isLogged, actualisationDate, publicationDate, request } =
+      this.props;
     const { submitForm } = this;
-
-    console.log('this.props', this.props);
-    console.log('this.state', this.state);
-    console.log('this', this);
-
     return (
       <div>
         {isLogged ? (
@@ -92,6 +76,7 @@ class Component extends React.Component {
               <div className={clsx(className, styles.head)}>
                 <h3>Nowe ogłoszenie</h3>
                 <Button
+                  className="Button"
                   name="Dodaj ogłoszenie"
                   icon={faPlusCircle}
                   type="submit"
@@ -102,11 +87,9 @@ class Component extends React.Component {
               <div className={clsx(className, styles.inputs)}>
                 <TextField
                   className={clsx(className, styles.input)}
-                  // error
                   id="filled-error-helper-text"
                   label="Tytuł ogłoszenia*"
                   placeholder="Tytuł ogłoszenia"
-                  // helperText="Tytuł jest wymagany"
                   variant="filled"
                   fullWidth={true}
                   minLength={10}
@@ -201,10 +184,7 @@ class Component extends React.Component {
 }
 
 Component.propTypes = {
-  // children: PropTypes.node,
   className: PropTypes.string,
-  // name: PropTypes.string,
-  // icon: PropTypes.object,
   isLogged: PropTypes.bool,
   to: PropTypes.string,
   addPost: PropTypes.func,
@@ -226,8 +206,4 @@ const mapDispatchToProps = dispatch => ({
 
 const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
 
-export {
-  // Component as PostAdd,
-  Container as PostAdd,
-  Component as PostAddComponent,
-};
+export { Container as PostAdd, Component as PostAddComponent };

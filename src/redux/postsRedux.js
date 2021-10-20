@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import { api, API_URL } from '../settings';
+import { API_URL } from '../settings';
 
 /* selectors */
 export const getRequest = ({ posts }, name) => posts.requests[name];

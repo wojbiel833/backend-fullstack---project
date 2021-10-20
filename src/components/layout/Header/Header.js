@@ -1,13 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import clsx from 'clsx';
 
 import { connect } from 'react-redux';
-// import {
-//   reduxSelector,
-//   reduxActionCreator,
-// } from '../../../redux/exampleRedux.js';
 
 import styles from './Header.module.scss';
 
@@ -44,11 +39,7 @@ const mapStateToProps = state => ({
   isLogged: state.login.loggedIn,
 });
 
-const mapDispatchToProps = dispatch => ({
-  // someAction: arg => dispatch(reduxActionCreator(arg)),
-});
-
-const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
+const Container = connect(mapStateToProps, null)(Component);
 
 export {
   Component as Header,

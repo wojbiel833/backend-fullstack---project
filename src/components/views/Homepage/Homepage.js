@@ -1,19 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import clsx from 'clsx';
 
+import { YourPostsContainer } from '../YourPosts/YourPosts';
 import { Announcements } from '../../features/Announcements/Announcements';
 
 import { connect } from 'react-redux';
-// import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
 
 import Link from '@mui/material/Link';
-import { styled } from '@mui/material/styles';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-
+import { styled } from '@mui/material/styles';
 import styles from './Homepage.module.scss';
-import { YourPostsContainer } from '../YourPosts/YourPosts';
 
 const StyledLink = styled(Link)(({ theme }) => ({
   position: 'relative',
@@ -31,13 +28,13 @@ const Component = ({ className, children, isLogged }) => (
             <p>Dodaj nowe ogłoszenie</p>
           </StyledLink>
         </h4>
-        <YourPostsContainer />
-        <Announcements>{children}</Announcements>
+        <YourPostsContainer className="YourPosts" />
+        <Announcements className="Announcements">{children}</Announcements>
       </div>
     ) : (
       <div>
-        {isLogged ? <YourPostsContainer /> : ''}
-        <Announcements>{children}</Announcements>
+        {isLogged ? <YourPostsContainer className="YourPosts" /> : ''}
+        <Announcements className="Announcements">{children}</Announcements>
       </div>
     )}
   </div>
@@ -53,14 +50,6 @@ const mapStateToProps = state => ({
   isLogged: state.login.loggedIn,
 });
 
-const mapDispatchToProps = dispatch => ({
-  // someAction: arg => dispatch(reduxActionCreator(arg)),
-});
+const Container = connect(mapStateToProps, null)(Component);
 
-const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
-
-export {
-  // Component as Homepage,
-  Container as Homepage,
-  Component as HomepageComponent,
-};
+export { Container as Homepage, Component as HomepageComponent };
