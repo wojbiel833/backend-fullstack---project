@@ -67,12 +67,14 @@ export const fetchPublished = () => {
 export const addPostRequest = data => {
   return async dispatch => {
     dispatch(startRequest({ name: ADD_POST }));
+    console.log('ADD POST REQUEEST');
     try {
       let res = await Axios.post(`${API_URL}/posts`, data, {
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
+          'Content-Type': 'multipart/form-data',
         },
       });
+      console.log(res.data);
       dispatch(addPost(res.data));
       dispatch(endRequest({ name: ADD_POST }));
     } catch (e) {

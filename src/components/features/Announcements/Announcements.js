@@ -4,16 +4,16 @@ import clsx from 'clsx';
 
 import { PostContainer } from '../../common/Post/Post';
 
-import { fetchPublished } from '../../../redux/postsRedux';
+// import { fetchPublished } from '../../../redux/postsRedux';
 import { connect } from 'react-redux';
 
 import styles from './Announcements.module.scss';
 
 class Component extends React.Component {
-  componentDidMount() {
-    const { fetchPublishedPosts } = this.props;
-    fetchPublishedPosts();
-  }
+  // componentDidMount() {
+  //   const { fetchPublishedPosts } = this.props;
+  //   fetchPublishedPosts();
+  // }
 
   render() {
     const { className, posts } = this.props;
@@ -45,10 +45,10 @@ const mapStateToProps = state => ({
   isLogged: state.login.loggedIn,
 });
 
-const mapDispatchToProps = dispatch => ({
-  fetchPublishedPosts: () => dispatch(fetchPublished()),
-});
+// const mapDispatchToProps = dispatch => ({
+//   fetchPublishedPosts: () => dispatch(fetchPublished()),
+// });
 
-const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
+const Container = connect(mapStateToProps, null)(Component);
 
 export { Container as Announcements, Component as AnnouncementsComponent };

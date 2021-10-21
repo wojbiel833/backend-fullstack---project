@@ -18,8 +18,54 @@ router.get('/posts', async (req, res) => {
   }
 });
 
-router.get('/posts/:id', async (req, res) => {
-  console.log('asw');
+router.post('/posts', async (req, res) => {
+  console.log('/posts POST');
+  try {
+    const id = shortid.generate();
+    const {
+      name,
+      content,
+      email,
+      phone,
+      localization,
+      publicationDate,
+      actualisationDate,
+      status,
+    } = req.body;
+
+    // let error;
+    // if (!name || !content || !email || !localization)
+    //   error = 'Musisz wypełnić wymagane pola oznaczone gwiazdką';
+
+    // if (name.length <= 10) error = 'Tytuł jest za krótki (min. 10 znaków)';
+    // if (content.length <= 20) error = 'Tytuł jest za krótki (min. 20 znaków)';
+    // if (!email.includes('@')) error = 'Zły format adresu e-mail';
+    // if (!localization) error = 'Musisz podać nazwę lokalizacji';
+
+    // if (!error) {
+    const newPost = new Post({
+      id: id,
+      name: name,
+      content: content,
+      email: email,
+      phone: phone,
+      localization: localization,
+      publicationDate: publicationDate,
+      actualisationDate: actualisationDate,
+      status: status,
+    });
+
+    await newPost.save();
+    res.json({ message: 'OK', post: newPost });
+    // } else
+    // res.json({ message: error });
+  } catch (err) {
+    res.status(500).json({ message: err });
+    console.log(err);
+  }
+});
+
+router.get('/post/:id', async (req, res) => {
   try {
     const result = await Post.findById(req.params.id);
     if (!result) res.status(404).json({ post: 'Not found' });
@@ -75,7 +121,6 @@ router.post('/post/add', async (req, res) => {
 });
 
 router.put('/post/:id/edit', async (req, res) => {
-  console.log('aaas');
   const {
     name,
     content,

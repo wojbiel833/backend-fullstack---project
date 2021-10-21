@@ -33,34 +33,46 @@ class Component extends React.Component {
   submitForm = e => {
     e.preventDefault();
 
-    const { post } = this.state;
+    try {
+      const { post } = this.state;
+      const { request } = this.props;
+      console.log(post);
+      console.log(request);
 
-    let error = null;
+      let error = null;
 
-    if (!post.name || !post.content || !post.email || !post.localization)
-      error = 'Musisz wypełnić wymagane pola oznaczone gwiazdką';
+      if (!post.name || !post.content || !post.email || !post.localization)
+        error = 'Musisz wypełnić wymagane pola oznaczone gwiazdką';
 
-    if (post.name.length <= 10) error = 'Tytuł jest za krótki (min. 10 znaków)';
-    if (post.content.length <= 20)
-      error = 'Tytuł jest za krótki (min. 20 znaków)';
-    if (!post.email.includes('@')) error = 'Zły format adresu e-mail';
-    if (post.localization.length <= 3)
-      error = 'Nazwa lokalizacji jest za krótka (min. 3 znaki)';
+      if (post.name.length <= 10)
+        error = 'Tytuł jest za krótki (min. 10 znaków)';
+      if (post.content.length <= 20)
+        error = 'Treść jest za krótka (min. 20 znaków)';
+      if (!post.email.includes('@')) error = 'Zły format adresu e-mail';
+      if (!post.localization) error = 'Musisz podać lokalizację!';
 
-    if (!error) {
-      const formData = new FormData();
+      if (error === null) {
+        console.log(post);
+        console.log(error);
 
-      for (let key of ['name', 'content', 'email', 'phone', 'localization']) {
-        formData.append(key, this.state[key]);
+        const formData = new FormData();
+        for (let key of ['name', 'content', 'email', 'phone', 'localization']) {
+          formData.append(key, post[key]);
+          console.log(key, post[key]);
+        }
+
+        console.log(formData);
+
+        this.props.addPost(formData);
+        this.setState({ error: null });
+        console.log('udało się', formData);
+      } else {
+        this.setState({ error });
+
+        console.log('nie udało się', error);
       }
-
-      this.props.addPost(formData);
-      this.setState({ error: null });
-      console.log('udało się', formData);
-    } else {
-      this.setState({ error });
-
-      console.log('nie udało się');
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -71,7 +83,11 @@ class Component extends React.Component {
     return (
       <div>
         {isLogged ? (
-          <form className={clsx(className, styles.root)} onSubmit={submitForm}>
+          <form
+            className={clsx(className, styles.root)}
+            id="formElem"
+            onSubmit={submitForm}
+          >
             <div className={clsx(className, styles.content)}>
               <div className={clsx(className, styles.head)}>
                 <h3>Nowe ogłoszenie</h3>
@@ -94,6 +110,7 @@ class Component extends React.Component {
                   fullWidth={true}
                   minLength={10}
                   name="name"
+                  type="name"
                   value={this.state.post.name}
                   onChange={e => this.setPostParam('name', e.target.value)}
                 />
@@ -108,6 +125,7 @@ class Component extends React.Component {
                   fullWidth={true}
                   minLength={20}
                   name="content"
+                  type="content"
                   value={this.state.post.content}
                   onChange={e => this.setPostParam('content', e.target.value)}
                 />
@@ -122,6 +140,7 @@ class Component extends React.Component {
                   rows={1}
                   placeholder="example@gmail.com"
                   name="email"
+                  type="email"
                   value={this.state.post.email}
                   onChange={e => this.setPostParam('email', e.target.value)}
                 />
@@ -134,6 +153,7 @@ class Component extends React.Component {
                   rows={1}
                   placeholder="0 700 880 774"
                   name="phone"
+                  type="phone"
                   value={this.state.post.phone}
                   onChange={e => this.setPostParam('phone', e.target.value)}
                 />
@@ -146,6 +166,7 @@ class Component extends React.Component {
                   rows={1}
                   placeholder="Warszawa"
                   name="localization"
+                  type="localization"
                   value={this.state.post.localization}
                   onChange={e =>
                     this.setPostParam('localization', e.target.value)
