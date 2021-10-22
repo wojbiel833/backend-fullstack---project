@@ -36,7 +36,6 @@ router.post('/posts', async (req, res) => {
       actualisationDate,
       status,
     } = req.body;
-    console.log(req.body);
     // console.log(req.body);
     // const { resObj } = JSON.parse(req.body);
     // console.log(resObj);
@@ -51,9 +50,17 @@ router.post('/posts', async (req, res) => {
 
     // if (!error) {
     const newPost = new Post({
-      ...req.body,
+      id: id,
+      name: name,
+      content: content,
+      email: email,
+      phone: phone,
+      localization: localization,
+      publicationDate: publicationDate,
+      actualisationDate: actualisationDate,
+      status: status,
     });
-
+    console.log(newPost);
     await newPost.save();
     res.json({ message: 'OK', post: newPost });
     // } else

@@ -36,9 +36,9 @@ class Component extends React.Component {
 
     try {
       const { post } = this.state;
-      const { request } = this.props;
+      const { posts } = this.props;
       console.log(post);
-      console.log(request);
+      console.log(posts);
 
       let error = null;
 
@@ -53,23 +53,14 @@ class Component extends React.Component {
       if (!post.localization) error = 'Musisz podać lokalizację!';
 
       if (error === null) {
-        console.log(post);
-        console.log(error);
-
-        let formData = {};
-        for (let key of ['name', 'content', 'email', 'phone', 'localization']) {
-          // formData.push({ key: post[key] });
-          // console.log(key, post[key]);
-          formData = {
-            // key: post[key],
-            id: shortId.generate(),
-            name: post.name,
-            content: post.content,
-            email: post.email,
-            phone: post.phone,
-            localization: post.localization,
-          };
-        }
+        let formData = {
+          id: shortId.generate(),
+          name: post.name,
+          content: post.content,
+          email: post.email,
+          phone: post.phone,
+          localization: post.localization,
+        };
 
         console.log(formData);
 
