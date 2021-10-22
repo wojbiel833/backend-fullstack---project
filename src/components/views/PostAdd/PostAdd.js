@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
+import shortId from 'shortid';
 
 import { Button } from '../../common/Button/Button';
 import { NotFound } from '../NotFound/NotFound';
@@ -55,10 +56,19 @@ class Component extends React.Component {
         console.log(post);
         console.log(error);
 
-        const formData = new FormData();
+        let formData = {};
         for (let key of ['name', 'content', 'email', 'phone', 'localization']) {
-          formData.append(key, post[key]);
-          console.log(key, post[key]);
+          // formData.push({ key: post[key] });
+          // console.log(key, post[key]);
+          formData = {
+            // key: post[key],
+            id: shortId.generate(),
+            name: post.name,
+            content: post.content,
+            email: post.email,
+            phone: post.phone,
+            localization: post.localization,
+          };
         }
 
         console.log(formData);

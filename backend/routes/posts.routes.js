@@ -20,6 +20,10 @@ router.get('/posts', async (req, res) => {
 
 router.post('/posts', async (req, res) => {
   console.log('/posts POST');
+
+  // console.log('REQ.PARAMS', req.params);
+  // console.log('RES', res);
+  // console.log(res);
   try {
     const id = shortid.generate();
     const {
@@ -32,7 +36,10 @@ router.post('/posts', async (req, res) => {
       actualisationDate,
       status,
     } = req.body;
-
+    console.log(req.body);
+    // console.log(req.body);
+    // const { resObj } = JSON.parse(req.body);
+    // console.log(resObj);
     // let error;
     // if (!name || !content || !email || !localization)
     //   error = 'Musisz wypełnić wymagane pola oznaczone gwiazdką';
@@ -44,15 +51,7 @@ router.post('/posts', async (req, res) => {
 
     // if (!error) {
     const newPost = new Post({
-      id: id,
-      name: name,
-      content: content,
-      email: email,
-      phone: phone,
-      localization: localization,
-      publicationDate: publicationDate,
-      actualisationDate: actualisationDate,
-      status: status,
+      ...req.body,
     });
 
     await newPost.save();
