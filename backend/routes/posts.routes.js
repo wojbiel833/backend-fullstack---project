@@ -36,35 +36,32 @@ router.post('/posts', async (req, res) => {
       actualisationDate,
       status,
     } = req.body;
-    // console.log(req.body);
-    // const { resObj } = JSON.parse(req.body);
-    // console.log(resObj);
-    // let error;
-    // if (!name || !content || !email || !localization)
-    //   error = 'Musisz wypełnić wymagane pola oznaczone gwiazdką';
 
-    // if (name.length <= 10) error = 'Tytuł jest za krótki (min. 10 znaków)';
-    // if (content.length <= 20) error = 'Tytuł jest za krótki (min. 20 znaków)';
-    // if (!email.includes('@')) error = 'Zły format adresu e-mail';
-    // if (!localization) error = 'Musisz podać nazwę lokalizacji';
+    let error;
+    if (!name || !content || !email || !localization)
+      error = 'Musisz wypełnić wymagane pola oznaczone gwiazdką';
 
-    // if (!error) {
-    const newPost = new Post({
-      id: id,
-      name: name,
-      content: content,
-      email: email,
-      phone: phone,
-      localization: localization,
-      publicationDate: publicationDate,
-      actualisationDate: actualisationDate,
-      status: status,
-    });
-    console.log(newPost);
-    await newPost.save();
-    res.json({ message: 'OK', post: newPost });
-    // } else
-    // res.json({ message: error });
+    if (name.length <= 10) error = 'Tytuł jest za krótki (min. 10 znaków)';
+    if (content.length <= 20) error = 'Tytuł jest za krótki (min. 20 znaków)';
+    if (!email.includes('@')) error = 'Zły format adresu e-mail';
+    if (!localization) error = 'Musisz podać nazwę lokalizacji';
+
+    if (!error) {
+      const newPost = new Post({
+        id: id,
+        name: name,
+        content: content,
+        email: email,
+        phone: phone,
+        localization: localization,
+        publicationDate: publicationDate,
+        actualisationDate: actualisationDate,
+        status: status,
+      });
+      console.log(newPost);
+      await newPost.save();
+      res.json({ message: 'OK', post: newPost });
+    } else res.json({ message: error });
   } catch (err) {
     res.status(500).json({ message: err });
     console.log(err);

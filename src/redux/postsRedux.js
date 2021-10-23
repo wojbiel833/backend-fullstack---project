@@ -71,12 +71,7 @@ export const addPostRequest = data => {
     console.log('ADD POST REQUEEST');
     try {
       let res = await Axios.post('http://localhost:8000/api/posts', data);
-      // res.data.post = { ...res.data.post, ...data };
-      // console.log(data);
-      // console.log(res);
-      // console.log(res.data);
       dispatch(addPost(res.data.post));
-      // dispatch(fetchPublished());
       dispatch(endRequest({ name: ADD_POST }));
     } catch (e) {
       dispatch(errorRequest({ name: ADD_POST, error: e.message }));
@@ -88,11 +83,8 @@ export const updatePostRequest = data => {
   return async dispatch => {
     dispatch(startRequest({ name: ADD_POST }));
     try {
-      let res = await Axios.put(`${API_URL}/posts`, data, {
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-      });
+      let res = await Axios.put(`${API_URL}/posts`, data);
+      console.log(res.data.post);
       dispatch(addPost(res.data));
       dispatch(endRequest({ name: ADD_POST }));
     } catch (e) {

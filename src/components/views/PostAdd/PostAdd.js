@@ -78,7 +78,7 @@ class Component extends React.Component {
   };
 
   render() {
-    const { className, isLogged, actualisationDate, publicationDate, request } =
+    const { className, isLogged, actualisationDate, publicationDate } =
       this.props;
     const { submitForm } = this;
     return (
