@@ -13,6 +13,7 @@ import {
   getRequest,
   ADD_POST,
 } from '../../../redux/postsRedux';
+import { fetchPublished } from '../../../redux/postsRedux';
 
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import TextField from '@mui/material/TextField';
@@ -65,6 +66,7 @@ class Component extends React.Component {
         console.log(formData);
 
         this.props.addPost(formData);
+        this.props.fetchPublishedPosts();
         this.setState({ error: null });
         console.log('udało się', formData);
       } else {
@@ -210,6 +212,7 @@ Component.propTypes = {
   isLogged: PropTypes.bool,
   to: PropTypes.string,
   addPost: PropTypes.func,
+  fetchPublishedPosts: PropTypes.func,
   request: PropTypes.object,
   posts: PropTypes.array,
   actualisationDate: PropTypes.string,
@@ -224,6 +227,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   addPost: data => dispatch(addPostRequest(data)),
+  fetchPublishedPosts: () => dispatch(fetchPublished()),
 });
 
 const Container = connect(mapStateToProps, mapDispatchToProps)(Component);

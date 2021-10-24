@@ -6,7 +6,7 @@ const Post = require('../models/post.model');
 
 router.get('/posts', async (req, res) => {
   try {
-    const result = await Post.find({ status: 'Opublikowane' })
+    const result = await Post.find()
       .select(
         'id name content email phone localization publicationDate actualisationDate status'
       )
